@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>vgmrad.io</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a *ngIf="!appUser?.displayName" mat-button [routerLink]="'/login'"> Login </a>
+      <ng-container *ngIf="!!appUser?.displayName">
+        <button mat-button [matMenuTriggerFor]="menu">{{appUser.displayName}}</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="'/admin'" *ngIf="isAdmin">Admin</button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </ng-container>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
