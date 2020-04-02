@@ -1,10 +1,11 @@
 export interface ISong {
-  key: string | number;
+  key: string;
   title: string;
   game: string;
   composer?: string;
   songFilename: string;
   ostImageFilename: string;
   isRelaxing: boolean;
-  dateCreated: string;
+  dateCreated?: string;
+  dateUpdated?: string;
 }

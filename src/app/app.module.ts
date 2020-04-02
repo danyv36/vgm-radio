@@ -16,6 +16,8 @@ import { AuthService } from './auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+// import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -25,14 +27,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TestComponent } from './test/test.component';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SongService } from './song.service';
 import { SongsTableComponent } from './admin/songs-table/songs-table.component';
+import { AdminDialogComponent } from './admin/admin-dialog/admin-dialog.component';
+import { HoldableDirective } from './holdable.directive';
 
 @NgModule({
   declarations: [
@@ -45,16 +50,21 @@ import { SongsTableComponent } from './admin/songs-table/songs-table.component';
     TestComponent,
     AdminSongsComponent,
     SongsTableComponent,
+    AdminDialogComponent,
+    HoldableDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NoopAnimationsModule,
 
+    MatProgressBarModule,
+    MatDialogModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -67,16 +77,19 @@ import { SongsTableComponent } from './admin/songs-table/songs-table.component';
     MatTableModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'admin/songs', component: AdminSongsComponent }, //, canActivate: [AdminAuthGuardService] },
-      { path: 'admin', component: AdminComponent }, //, canActivate: [AdminAuthGuardService] },
+      { path: 'admin/songs', component: AdminSongsComponent }, // , canActivate: [AdminAuthGuardService] },
+      { path: 'admin', component: AdminComponent }, // , canActivate: [AdminAuthGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ])
   ],
   exports: [
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule
   ],
-  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService],
+  entryComponents: [AdminDialogComponent],
+  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

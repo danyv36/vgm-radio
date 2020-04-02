@@ -5,6 +5,8 @@ import { ISong } from 'src/app/models/songs.model';
 import { FormControl } from '@angular/forms';
 import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
 
 @Component({
   selector: 'app-songs-table',
@@ -19,7 +21,7 @@ export class SongsTableComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['key', 'game', 'title', 'edit'];
   searchFilter = new FormControl('');
 
-  constructor(private songService: SongService) { }
+  constructor(private songService: SongService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.subscription = this.songService.getAll().subscribe((songs) => {
@@ -42,9 +44,12 @@ export class SongsTableComponent implements OnInit, OnDestroy {
     this.searchSubscription.unsubscribe();
   }
 
-  handleEdit(song) {
-
+  handleEdit(song: ISong): void {
     console.log('handling edit::', song);
+    const dialogRef = this.dialog.open(AdminDialogComponent, { width: '500px', data: song });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed::', result);
+    });
   }
 }
 
