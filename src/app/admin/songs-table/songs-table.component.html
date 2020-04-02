@@ -1,0 +1,30 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input [formControl]="searchFilter" matInput>
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="key">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let song"> {{song.key}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="game">
+    <th mat-header-cell *matHeaderCellDef> Game </th>
+    <td mat-cell *matCellDef="let song"> {{song.game}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let song"> {{song.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Edit </th>
+    <td mat-cell *matCellDef="let song">
+      <a class="row-edit" (click)="handleEdit(song)">Edit</a> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

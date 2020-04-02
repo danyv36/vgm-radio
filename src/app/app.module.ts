@@ -24,12 +24,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
 import { TestComponent } from './test/test.component';
 import { AuthGuardService } from './auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { SongService } from './song.service';
+import { SongsTableComponent } from './admin/songs-table/songs-table.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +43,13 @@ import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
     NoAccessComponent,
     NavbarComponent,
     TestComponent,
-    AdminSongsComponent
+    AdminSongsComponent,
+    SongsTableComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -59,10 +64,11 @@ import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
     MatCheckboxModule,
     MatInputModule,
     MatFormFieldModule,
+    MatTableModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'admin/songs', component: AdminSongsComponent, canActivate: [AdminAuthGuardService] },
-      { path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuardService] },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'admin/songs', component: AdminSongsComponent }, //, canActivate: [AdminAuthGuardService] },
+      { path: 'admin', component: AdminComponent }, //, canActivate: [AdminAuthGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ])
@@ -70,7 +76,7 @@ import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
   exports: [
     MatMenuModule
   ],
-  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService],
+  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

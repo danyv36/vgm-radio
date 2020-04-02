@@ -1,4 +1,5 @@
-- Create login process
-- Create navbar at the top
+- x Create basic login process
+- x Create basic navbar at the top
 - Create CRUD pages
+  - Have a snackbar for when a song is saved! :)
 - Get soundmanager to work in the main page...

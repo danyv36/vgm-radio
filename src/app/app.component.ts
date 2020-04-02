@@ -20,12 +20,12 @@ export class AppComponent {
       if (user) {
         userService.save(user);
 
-        const returnUrl = localStorage.getItem('returnUrl');
-        if (returnUrl) {
-          localStorage.removeItem('returnUrl');
-          router.navigateByUrl(returnUrl);
-        }
-        router.navigateByUrl(returnUrl);
+        // const returnUrl = localStorage.getItem('returnUrl');
+        // if (returnUrl) {
+        //   localStorage.removeItem('returnUrl');
+        //   router.navigateByUrl(returnUrl);
+        // }
+        // router.navigateByUrl(returnUrl);
       }
     });
     // db.list('/songs').valueChanges().subscribe((songs) => {
