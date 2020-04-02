@@ -1,13 +1,14 @@
-<h2 mat-dialog-title>Edit song</h2>
+<h2 *ngIf="editMode; else createMode" mat-dialog-title>Edit song</h2>
+<ng-template #createMode>Add song</ng-template>
 <mat-dialog-content>
   <ng-container>
     <app-admin-songs [song]="data"></app-admin-songs>
-    <mat-progress-bar class="example-margin" color="warn" mode="determinate" [value]="deleteProgress">
+    <mat-progress-bar *ngIf="editMode" class="example-margin" color="warn" mode="determinate" [value]="deleteProgress">
     </mat-progress-bar>
   </ng-container>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>Cancel</button>
   <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-raised-button color="warn" holdable (holdTime)="holdHandler($event)">Delete</button>
+  <button mat-raised-button color="warn" *ngIf="editMode" holdable (holdTime)="holdHandler($event)">Delete</button>
 </mat-dialog-actions>

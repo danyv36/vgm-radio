@@ -62,7 +62,7 @@ export class AdminSongsComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const song: ISong = this.form.value;
-    if (!this.song.key) {
+    if (!this.song) {
       song.dateCreated = new Date().toISOString();
       this.songService.save(song);
 

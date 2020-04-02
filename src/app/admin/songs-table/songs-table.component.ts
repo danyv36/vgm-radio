@@ -30,7 +30,7 @@ export class SongsTableComponent implements OnInit, OnDestroy {
     });
 
     this.searchSubscription = this.searchFilter.valueChanges.pipe(
-      filter(text => text.length > 3),
+      // filter(text => text.length > 3),
       debounceTime(200),
       distinctUntilChanged()
     ).subscribe((v: string) => {

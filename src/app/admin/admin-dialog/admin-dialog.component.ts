@@ -11,10 +11,12 @@ import { SongService } from 'src/app/song.service';
 export class AdminDialogComponent implements OnInit {
 
   deleteProgress = 0;
+  editMode: boolean;
 
   constructor(public dialogRef: MatDialogRef<AdminDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ISong, private songService: SongService) {
     console.log('data received in dialog::', data);
+    this.editMode = !!data && !!data.key;
   }
 
   ngOnInit(): void {
