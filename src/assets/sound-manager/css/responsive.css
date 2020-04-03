@@ -1,0 +1,54 @@
+@media screen and (max-width: 660px) {
+    /**********************************
+      HEADER
+    ***********************************/
+    /* nav background on mobile */
+    nav {
+      background: #039dcc;
+      width: 100%;
+      text-align: center;
+      font-size: 1em;
+      /*border-bottom: 1px solid #e6e6e6;*/
+      box-shadow: 0 3px 5px #b3b3b3;
+    }
+
+    nav a{
+      color: #ffffff;
+    }
+
+    #logo{
+      width: 100%;
+      text-align: center;
+    }
+
+    header{
+      margin-bottom: 5em;
+    }
+
+    /**********************************
+      BAR-UI
+    ***********************************/
+
+    .title{
+      font-size: 1em; 
+    }
+    
+    .game{
+      font-size: 0.7em;
+    }
+   
+}
+
+/********************
+SIGN-IN FORM
+*********************/
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+  margin-bottom: 10px;
+}

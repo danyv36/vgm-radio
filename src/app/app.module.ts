@@ -38,6 +38,7 @@ import { SongService } from './song.service';
 import { SongsTableComponent } from './admin/songs-table/songs-table.component';
 import { AdminDialogComponent } from './admin/admin-dialog/admin-dialog.component';
 import { HoldableDirective } from './holdable.directive';
+import { MusicPlayerComponent } from './music-player/music-player.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { HoldableDirective } from './holdable.directive';
     AdminSongsComponent,
     SongsTableComponent,
     AdminDialogComponent,
-    HoldableDirective
+    HoldableDirective,
+    MusicPlayerComponent
   ],
   imports: [
     BrowserModule,
