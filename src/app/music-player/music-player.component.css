@@ -25,7 +25,7 @@
   max-width: 30em;
   /* take out overflow if you want an absolutely-positioned playlist dropdown. */
   border-radius: 2px;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* just for fun (animate normal / full-width) */
   transition: max-width 0.2s ease-in-out;
  }
@@ -545,7 +545,6 @@
  
  .sm2-volume-control {
   background-image: url(../../assets/sound-manager/images/icomoon/entypo-25px-ffffff/PNG/volume.png);
-  background-image: none, url(../../assets/sound-manager/images/icomoon/entypo-25px-ffffff/SVG/volume.svg);
  }
  
  .sm2-volume-control,
@@ -559,7 +558,6 @@
   opacity: 0.33;
  /* -webkit-filter: invert(1);*/
   background-image: url(../../assets/sound-manager/images/icomoon/entypo-25px-ffffff/PNG/volume.png);
-  background-image: none, url(../../assets/sound-manager/images/icomoon/entypo-25px-000000/SVG/volume.svg);
  }
  
  .sm2-icon-menu {
