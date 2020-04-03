@@ -27,7 +27,10 @@
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/sound-manager/js/soundmanager-src/script/soundmanager2.js",
+              "src/assets/sound-manager/js/bar-ui.js"
+            ]
           },
           "configurations": {
             "production": {
