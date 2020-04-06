@@ -418,11 +418,6 @@
   position: relative;
   display: table-row;
  }
-
- .sm2-row-progressbar {
-  position: relative;
-  display: table-row;
- }
  
  .sm2-progress-bd {
   /* spacing between progress track/ball and time (position) */
@@ -638,7 +633,7 @@
  .sm2-playlist-wrapper ul li .sm2-icon,
  .sm2-playlist-wrapper ul li:hover .sm2-icon,
  .sm2-playlist-wrapper ul li.selected .sm2-icon {
-  /* background-size: 55%; */
+  background-size: 55%;
   background-position: 50% 50%;
   background-repeat: no-repeat;
  }
@@ -807,7 +802,7 @@
   z-index: 3;
   border-radius: 0px;
   width: 100%;
-  height: 400px;
+  height: 100% !important;
   border: none;
   background-image: none;
   display: block;

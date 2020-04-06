@@ -85,10 +85,11 @@
       <div class="sm2-playlist-wrapper">
 
         <ul class="sm2-playlist-bd">
-          <li *ngFor="let song of songs; index as i">
-            <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">{{song.game}} -
-              {{song.title}}</a>
-          </li>
+          <ng-container *ngFor="let song of songs; index as i">
+            <li>
+              <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">{{song.game}} - {{song.title}}</a>
+            </li>
+          </ng-container>
 
           <!-- item with "download" link -->
           <!-- <li>
@@ -106,9 +107,9 @@
           </li> -->
 
           <!-- standard one-line items -->
-          <!-- <li><a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">SonReal -
+          <li><a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">SonReal -
               People
-              Asking <span class="label">Explicit</span></a></li> -->
+              Asking <span class="label">Explicit</span></a></li>
         </ul>
 
       </div>
