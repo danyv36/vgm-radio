@@ -7,6 +7,24 @@
   </ul>
   <div class="sm2-bar-ui large flat playlist-open" id="player-wrap">
 
+    <div class="bd sm2-playlist">
+      <div class="sm2-playlist-target">
+        <!-- playlist <ul> + <li> markup will be injected here -->
+        <!-- if you want default / non-JS content, you can put that here. -->
+        <!-- <noscript>
+          <p>JavaScript is required.</p>
+        </noscript> -->
+        <div class="now-playing">
+          <div class="now-playing-ost">
+            <img src="../../assets/ost/xenoblade_chronicles_x.jpg" id="track-img" />
+          </div>
+          <div class="now-playing-info">
+            <div class="now-playing-title" id="song-name">Noctilum</div>
+            <div class="now-playing-game" id="game-name">Xenoblade Chronicles X</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="bd sm2-main-controls" style="background-color: rgb(63, 81, 181);">
 
       <div class="sm2-inline-texture"></div>
@@ -19,16 +37,6 @@
       </div>
 
       <div class="sm2-inline-element sm2-inline-status">
-
-        <div class="sm2-playlist">
-          <div class="sm2-playlist-target">
-            <!-- playlist <ul> + <li> markup will be injected here -->
-            <!-- if you want default / non-JS content, you can put that here. -->
-            <noscript>
-              <p>JavaScript is required.</p>
-            </noscript>
-          </div>
-        </div>
 
         <div class="sm2-progress">
           <div class="sm2-row">
@@ -85,11 +93,10 @@
       <div class="sm2-playlist-wrapper">
 
         <ul class="sm2-playlist-bd">
-          <ng-container *ngFor="let song of songs; index as i">
-            <li>
-              <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">{{song.game}} - {{song.title}}</a>
-            </li>
-          </ng-container>
+          <li *ngFor="let song of songs; index as i">
+            <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">{{song.game}} -
+              {{song.title}}</a>
+          </li>
 
           <!-- item with "download" link -->
           <!-- <li>
@@ -107,9 +114,9 @@
           </li> -->
 
           <!-- standard one-line items -->
-          <li><a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">SonReal -
+          <!-- <li><a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">SonReal -
               People
-              Asking <span class="label">Explicit</span></a></li>
+              Asking <span class="label">Explicit</span></a></li> -->
         </ul>
 
       </div>

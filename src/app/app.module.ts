@@ -39,6 +39,8 @@ import { SongsTableComponent } from './admin/songs-table/songs-table.component';
 import { AdminDialogComponent } from './admin/admin-dialog/admin-dialog.component';
 import { HoldableDirective } from './holdable.directive';
 import { MusicPlayerComponent } from './music-player/music-player.component';
+import { Sm2BarPlayerService } from './window-ref.service';
+import { ScriptService } from './script.service';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,7 @@ import { MusicPlayerComponent } from './music-player/music-player.component';
     MatFormFieldModule
   ],
   entryComponents: [AdminDialogComponent],
-  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService,
+  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService, Sm2BarPlayerService, ScriptService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent]
 })

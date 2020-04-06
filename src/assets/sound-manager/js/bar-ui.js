@@ -97,6 +97,8 @@
       o: null,
       playlist: null,
       playlistTarget: null,
+      nowPlayingTitle: null,
+      nowPlayingGame: null,
       playlistContainer: null,
       time: null,
       player: null,
@@ -156,14 +158,15 @@
       if (links.length) {
         item = links[0];
       }
-
       // remove any failed character sequence, also
-      dom.playlistTarget.innerHTML = '<ul class="sm2-playlist-bd"><li>' + item.innerHTML.replace(extras.loadFailedCharacter, '') + '</li></ul>';
-
-      if (dom.playlistTarget.getElementsByTagName('li')[0].scrollWidth > dom.playlistTarget.offsetWidth) {
-        // this item can use <marquee>, in fact.
-        dom.playlistTarget.innerHTML = '<ul class="sm2-playlist-bd"><li><marquee>' + item.innerHTML + '</marquee></li></ul>';
-      }
+      // dom.playlistTarget.innerHTML = '<ul class="sm2-playlist-bd"><li>' + item.innerHTML.replace(extras.loadFailedCharacter, '') + '</li></ul>';
+      const nowPlayingInfo = item.innerHTML.split('-');
+      dom.nowPlayingGame.innerHTML = nowPlayingInfo[0];
+      dom.nowPlayingTitle.innerHTML = nowPlayingInfo[1];
+      // if (dom.playlistTarget.getElementsByTagName('li')[0].scrollWidth > dom.playlistTarget.offsetWidth) {
+      //   // this item can use <marquee>, in fact.
+      //   dom.playlistTarget.innerHTML = '<ul class="sm2-playlist-bd"><li><marquee>' + item.innerHTML + '</marquee></li></ul>';
+      // }
 
     }
 
@@ -567,7 +570,7 @@
 
         // update selected offset, too.
         offset = findOffsetFromItem(liElement);
-
+        console.log('offset::', offset);
         data.selectedIndex = offset;
 
       }
@@ -621,6 +624,8 @@
         dom.playlistTarget = utils.dom.get(dom.o, '.sm2-playlist-target');
         dom.playlistContainer = utils.dom.get(dom.o, '.sm2-playlist-drawer');
         dom.playlist = utils.dom.get(dom.o, '.sm2-playlist-bd');
+        dom.nowPlayingTitle = utils.dom.get(dom.o, '.now-playing-title');
+        dom.nowPlayingGame = utils.dom.get(dom.o, '.now-playing-game');
 
       }
 

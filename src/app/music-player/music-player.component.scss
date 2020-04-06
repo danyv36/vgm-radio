@@ -5,6 +5,7 @@
  * Code provided under BSD license.
  * http://schillmania.com/projects/soundmanager2/license.txt
  */
+$main-color: rgb(63, 81, 181);
 
  .sm2-bar-ui {
   position: relative;
@@ -419,6 +420,11 @@
   display: table-row;
  }
  
+ .sm2-row-progressbar {
+  position: relative;
+  display: table-row;
+ }
+
  .sm2-progress-bd {
   /* spacing between progress track/ball and time (position) */
   padding: 0px 0.8em;
@@ -633,7 +639,7 @@
  .sm2-playlist-wrapper ul li .sm2-icon,
  .sm2-playlist-wrapper ul li:hover .sm2-icon,
  .sm2-playlist-wrapper ul li.selected .sm2-icon {
-  background-size: 55%;
+  /* background-size: 55%; */
   background-position: 50% 50%;
   background-repeat: no-repeat;
  }
@@ -1042,3 +1048,80 @@
   display: block;
   overflow: hidden;
  }
+
+ /**********************************
+CUSTOM STYLES
+***********************************/
+
+.sm2-bar-ui{
+  box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.sm2-player-bgcolor {
+  background-color: $main-color;
+}
+
+ .now-playing-ost, .now-playing-info{
+  /*float:left; commenting to make it vertically aligned*/
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.now-playing-ost{
+ width: 15%;
+}
+
+.now-playing-info{
+  width:85%;
+}
+
+.now-playing{
+ border-bottom: 0.075em solid $main-color;
+ background-color: $main-color;
+}
+
+.now-playing:after {
+ content: "";
+ display: table;
+ clear: both;
+}
+
+#track-img{
+ width: 100%;
+}
+
+/* img{ 
+  max-width: 100%; 
+} */
+
+.now-playing-title{
+ font-size:1.5em; 
+ font-weight:bold; 
+ margin: 0.3em 0 0.3em 0.5em;
+}
+
+.now-playing-game{
+ font-size:1.1em; 
+ margin-left: 0.8em; 
+ color: #fff;
+}
+
+/* html{
+ height: 100%;
+ background-color: rgb(250, 250, 250);
+}
+
+body{
+ min-height: 100%;
+ position: relative;
+ margin: 0;
+ padding-bottom: 2em;
+} */
+
+*,
+*:before,
+*:after {
+ -webkit-box-sizing: border-box;
+ -moz-box-sizing:    border-box;
+ box-sizing:         border-box;
+}
