@@ -17,7 +17,7 @@ export class SongService {
     });
   }
 
-  update(song: ISong, key: string) {
+  async update(song: ISong, key: string) {
     if (!key) {
       throw new Error('No key was provided to update the song.');
     }

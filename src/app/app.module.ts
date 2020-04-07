@@ -17,6 +17,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -78,6 +79,7 @@ import { ScriptService } from './script.service';
     MatInputModule,
     MatFormFieldModule,
     MatTableModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'admin/songs', component: AdminSongsComponent }, // , canActivate: [AdminAuthGuardService] },

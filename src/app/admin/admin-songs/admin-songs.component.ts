@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
@@ -13,7 +13,8 @@ import { ISong } from 'src/app/models/songs.model';
 })
 export class AdminSongsComponent implements OnInit, OnDestroy {
   @Input() song: ISong;
-  subscription: Subscription;
+  @Output() onSave = new EventEmitter();
+  subscriptions: Subscription[] = [];
 
   constructor(private fb: FormBuilder, private songService: SongService) {
   }
@@ -33,14 +34,23 @@ export class AdminSongsComponent implements OnInit, OnDestroy {
     console.log('admin songs::', this.song);
     this.updateSongValues(this.song);
     const titleControl = this.getControl('title');
+    const gameControl = this.getControl('game');
     const songFilenameControl = this.getControl('songFilename');
-    this.subscription = titleControl.valueChanges.subscribe((value) => {
+    const ostImageFilenameControl = this.getControl('ostImageFilename');
+
+    this.subscriptions.push(titleControl.valueChanges.subscribe((value) => {
       songFilenameControl.patchValue(_.kebabCase(value));
-    });
+    }));
+
+    this.subscriptions.push(gameControl.valueChanges.subscribe((value) => {
+      ostImageFilenameControl.patchValue(_.kebabCase(value));
+    }));
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((subscription) =>{
+      subscription.unsubscribe();
+    });
   }
 
   updateSongValues(song: ISong) {
@@ -71,7 +81,10 @@ export class AdminSongsComponent implements OnInit, OnDestroy {
       this.form.markAsUntouched();
     } else {
       song.dateUpdated = new Date().toISOString();
-      this.songService.update(song, this.song.key);
+      this.songService.update(song, this.song.key).then(()=>{
+        console.log('done updating!');
+        this.onSave.emit();
+      });
     }
 
     console.log(song);

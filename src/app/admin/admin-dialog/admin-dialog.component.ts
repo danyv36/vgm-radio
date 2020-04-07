@@ -22,6 +22,11 @@ export class AdminDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSongSaved(): void {
+    console.log('hello!! song was saved!!');
+    this.dialogRef.close();
+  }
+
   holdHandler(e) {
     console.log(e);
     this.deleteProgress = e / 10;
