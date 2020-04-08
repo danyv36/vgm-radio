@@ -12,6 +12,8 @@
 
   'use strict';
 
+  const assetsUrl = '../../assets/ost/';
+
   var Player,
     players = [],
     // CSS selector that will get us the top-level DOM node for the player UI.
@@ -213,6 +215,11 @@
 
         onplay: function () {
           utils.css.swap(dom.o, 'paused', 'playing');
+          const item = playlistController.getItem(); // this returns the <li> item
+          const imgSrc = item.childNodes[0].childNodes[0].childNodes[0].getAttribute('img-src'); // the child node is the <a>
+          console.log('bu::item.childNodes', item.childNodes[0].childNodes[0].childNodes[0]);
+          const ostImage = document.getElementById('track-img');
+          ostImage.src = `${assetsUrl}${imgSrc}`;
           callback('play', this);
         },
 

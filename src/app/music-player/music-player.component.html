@@ -1,10 +1,5 @@
 <section>
   {{songs|json}}
-  <ul>
-    <li *ngFor="let song of songs">
-      {{song.title}}
-    </li>
-  </ul>
   <div class="sm2-bar-ui large flat playlist-open" id="player-wrap">
 
     <div class="bd sm2-playlist">
@@ -16,7 +11,7 @@
         </noscript> -->
         <div class="now-playing">
           <div class="now-playing-ost">
-            <img src="../../assets/ost/xenoblade_chronicles_x.jpg" id="track-img" />
+            <img src="../../assets/ost/xenoblade-chronicles-x.jpg" id="track-img" />
           </div>
           <div class="now-playing-info">
             <div class="now-playing-title" id="song-name">Noctilum</div>
@@ -93,25 +88,35 @@
       <div class="sm2-playlist-wrapper">
 
         <ul class="sm2-playlist-bd">
-          <li *ngFor="let song of songs; index as i">
-            <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">{{song.game}} -
-              {{song.title}}</a>
-          </li>
 
           <!-- item with "download" link -->
-          <!-- <li>
+          <li *ngFor="let song of songs; index as i">
             <div class="sm2-row">
               <div class="sm2-col sm2-wide">
-                <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20LA%20%28Prod%20Chin%20Injetti%29.mp3">SonReal
-                  - LA<span class="label">Explicit</span></a>
+                <a href="http://www.schillmania.com/projects/soundmanager2/demo/_mp3/rain.mp3" [attr.img-src]=song.ostImageFilename>{{song.game}} -
+                  {{song.title}}</a>
               </div>
               <div class="sm2-col">
-                <a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20LA%20%28Prod%20Chin%20Injetti%29.mp3"
-                  target="_blank" title="Download &quot;LA&quot;" class="sm2-icon sm2-music sm2-exclude">Download this
-                  track</a>
-              </div>
+                <!-- <a class="dropbtn sm2-icon sm2-uplaylist sm2-exclude">d</a> -->
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item [matMenuTriggerFor]="existing">
+                    <span>Add to playlist</span>
+                  </button>
+                  <button mat-menu-item>
+                    <span>New playlist</span>
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </mat-menu>
+                <mat-menu #existing="matMenu">
+                  <button mat-menu-item>Playlist A</button>
+                  <button mat-menu-item>Playlist B</button>
+                </mat-menu>
             </div>
-          </li> -->
+            </div>
+          </li>
 
           <!-- standard one-line items -->
           <!-- <li><a href="http://freshly-ground.com/data/audio/sm2/SonReal%20-%20People%20Asking.mp3">SonReal -

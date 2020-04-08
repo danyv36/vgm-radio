@@ -722,6 +722,12 @@ $main-color: rgb(63, 81, 181);
   background-image: url(../../assets/sound-manager/images/icomoon/entypo-25px-000000/PNG/smile-dark.png);
   /*background-color: rgb(0, 0, 0);*/
  }
+
+ .sm2-bar-ui .sm2-playlist-wrapper ul li .sm2-uplaylist:hover,
+ .sm2-bar-ui .sm2-playlist-wrapper ul li.selected .sm2-uplaylist:hover, 
+ .sm2-bar-ui .sm2-playlist-wrapper ul li.selected .sm2-uplaylist, .sm2-uplaylist {
+  background-image: url(../../assets/sound-manager/images/icomoon/entypo-25px-ffffff/PNG/menu-vertical.png);
+ }
  
  .sm2-bar-ui.dark-text .sm2-playlist-wrapper ul li .sm2-col {
   border-left-color: rgba(0,0,0,0.15);

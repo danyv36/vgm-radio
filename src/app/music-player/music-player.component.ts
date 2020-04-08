@@ -13,6 +13,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   songs: ISong[];
+  imageSrc: string;
 
   constructor(private songService: SongService, private windowRef: Sm2BarPlayerService) { 
   }
