@@ -42,6 +42,7 @@ import { HoldableDirective } from './holdable.directive';
 import { MusicPlayerComponent } from './music-player/music-player.component';
 import { Sm2BarPlayerService } from './window-ref.service';
 import { ScriptService } from './script.service';
+import { PlaylistService } from './playlist.service';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,7 @@ import { ScriptService } from './script.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'admin/songs', component: AdminSongsComponent }, // , canActivate: [AdminAuthGuardService] },
-      { path: 'admin', component: AdminComponent }, // , canActivate: [AdminAuthGuardService] },
+      { path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ])
@@ -93,7 +94,7 @@ import { ScriptService } from './script.service';
     MatFormFieldModule
   ],
   entryComponents: [AdminDialogComponent],
-  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService, Sm2BarPlayerService, ScriptService,
+  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, SongService, Sm2BarPlayerService, ScriptService, PlaylistService,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent]
 })

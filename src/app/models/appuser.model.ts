@@ -4,4 +4,5 @@ export interface AppUser {
     admin?: boolean;
   };
   displayName: string;
+  uid: string;
 }

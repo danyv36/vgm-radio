@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { map } from 'rxjs/operators';
 import { ISong } from './models/songs.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

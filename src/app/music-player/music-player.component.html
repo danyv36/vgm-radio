@@ -111,8 +111,9 @@
                   </button>
                 </mat-menu>
                 <mat-menu #existing="matMenu">
-                  <button mat-menu-item>Playlist A</button>
-                  <button mat-menu-item>Playlist B</button>
+                  <ng-container *ngFor="let playlist of playlists">
+                    <button mat-menu-item>{{playlist.name}}</button>
+                  </ng-container>
                 </mat-menu>
             </div>
             </div>

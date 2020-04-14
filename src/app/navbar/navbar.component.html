@@ -3,8 +3,8 @@
     <h1>vgmrad.io</h1>
     <span class="menu-spacer"></span>
     <div>
-      <a *ngIf="!appUser?.displayName" mat-button [routerLink]="'/login'"> Login </a>
-      <ng-container *ngIf="!!appUser?.displayName">
+      <a *ngIf="!isLoggedIn" mat-button [routerLink]="'/login'"> Login </a>
+      <ng-container *ngIf="isLoggedIn">
         <button mat-button [matMenuTriggerFor]="menu">{{appUser.displayName}}</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="'/admin'" *ngIf="isAdmin">Admin</button>

@@ -11,13 +11,14 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   appUser: AppUser;
-  isLoggedIn = false;
   subscription: Subscription;
 
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.subscription = this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    this.subscription = this.auth.appUser$.subscribe(appUser => {
+      this.appUser = appUser;
+    });
   }
 
   logout() {
@@ -26,6 +27,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   get isAdmin() {
     return this.appUser.roles && this.appUser.roles.admin;
+    // return this.auth.appUser && this.auth.appUser.roles.admin;
+  }
+
+  get isLoggedIn(){
+    return this.appUser && this.appUser.displayName;
   }
 
   ngOnDestroy() {

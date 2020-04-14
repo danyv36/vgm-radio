@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -10,15 +10,21 @@ import { UserService } from './user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   // songs: Observable<any[]>; if youre not subscribing...
   songs: any[];
   song$: Observable<any>;
 
   constructor(private auth: AuthService, router: Router, private userService: UserService) {
-    auth.user$.subscribe(user => {
+  }
+
+  ngOnInit() {
+    this.auth.user$.subscribe(user => {
       if (user) {
-        userService.save(user);
+        this.userService.save(user);
+
+        // store uid in sessionStorage
+        sessionStorage.setItem('uid', user.uid);
 
         // const returnUrl = localStorage.getItem('returnUrl');
         // if (returnUrl) {
@@ -28,11 +34,5 @@ export class AppComponent {
         // router.navigateByUrl(returnUrl);
       }
     });
-    // db.list('/songs').valueChanges().subscribe((songs) => {
-    //   this.songs = songs;
-    //   console.log(this.songs);
-    // });
-
-    // this.song$ = db.object('/songs/1').valueChanges();
   }
 }
