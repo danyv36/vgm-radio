@@ -63,7 +63,7 @@ import { PlaylistService } from "./services/playlist.service";
     SongsTableComponent,
     AdminDialogComponent,
     HoldableDirective,
-    MusicPlayerComponent,
+    MusicPlayerComponent
   ],
   imports: [
     BrowserModule,

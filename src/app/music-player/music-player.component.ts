@@ -5,6 +5,7 @@ import { ISong } from "../models/songs.model";
 import { PlaylistService } from "../services/playlist.service";
 import { AppUser } from "../models/appuser.model";
 import { IPlaylist } from "../models/playlist.model";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: "app-music-player",
@@ -20,7 +21,8 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     private songService: SongService,
-    private playlistService: PlaylistService
+    private playlistService: PlaylistService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +47,15 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  addToPlaylist(song: ISong, playlistKey: string) {
-    console.log("song::", song);
-    console.log("playlistKey::", playlistKey);
-    this.playlistService.addSongToPlaylist(song, playlistKey);
+  openSnackBar() {
+    this.snackBar.open('Song added to playlist', 'Dismiss', {
+      duration: 3000
+    });
+  }
+
+  async addToPlaylist(song: ISong, playlistKey: string) {
+    await this.playlistService.addSongToPlaylist(song, playlistKey);
+    this.openSnackBar();
   }
 
   ngOnDestroy() {

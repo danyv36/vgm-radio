@@ -26,7 +26,7 @@ export class PlaylistService {
       );
   }
 
-  addSongToPlaylist(song: ISong, key: string): Promise<void> {
+  async addSongToPlaylist(song: ISong, key: string): Promise<void> {
     if (!key) {
       throw new Error("No key was provided to update the playlist.");
     }
