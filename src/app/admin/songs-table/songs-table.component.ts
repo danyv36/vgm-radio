@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SongService } from "src/app/song.service";
+import { SongService } from "src/app/services/song.service";
 import { Subscription, Observable } from "rxjs";
 import { ISong } from "src/app/models/songs.model";
 import { FormControl } from "@angular/forms";

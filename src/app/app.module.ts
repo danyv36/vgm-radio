@@ -15,7 +15,7 @@ import { AdminComponent } from "./admin/admin.component";
 import { LoginComponent } from "./login/login.component";
 import { RouterModule } from "@angular/router";
 import { NoAccessComponent } from "./no-access/no-access.component";
-import { AuthService } from "./auth.service";
+import { AuthService } from "./services/auth.service";
 import { NavbarComponent } from "./navbar/navbar.component";
 
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -36,19 +36,19 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { TestComponent } from "./test/test.component";
-import { AuthGuardService } from "./auth-guard.service";
-import { UserService } from "./user.service";
-import { AdminAuthGuardService } from "./admin-auth-guard.service";
+import { AuthGuardService } from "./services/auth-guard.service";
+import { UserService } from "./services/user.service";
+import { AdminAuthGuardService } from "./services/admin-auth-guard.service";
 import { AdminSongsComponent } from "./admin/admin-songs/admin-songs.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { SongService } from "./song.service";
+import { SongService } from "./services/song.service";
 import { SongsTableComponent } from "./admin/songs-table/songs-table.component";
 import { AdminDialogComponent } from "./admin/admin-dialog/admin-dialog.component";
 import { HoldableDirective } from "./holdable.directive";
 import { MusicPlayerComponent } from "./music-player/music-player.component";
-import { Sm2BarPlayerService } from "./window-ref.service";
-import { ScriptService } from "./script.service";
-import { PlaylistService } from "./playlist.service";
+import { Sm2BarPlayerService } from "./services/window-ref.service";
+import { ScriptService } from "./services/script.service";
+import { PlaylistService } from "./services/playlist.service";
 
 @NgModule({
   declarations: [

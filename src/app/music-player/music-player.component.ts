@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SongService } from "../song.service";
+import { SongService } from "../services/song.service";
 import { Subscription } from "rxjs";
 import { ISong } from "../models/songs.model";
-import { Sm2BarPlayerService } from "../window-ref.service";
-import { PlaylistService } from "../playlist.service";
+import { PlaylistService } from "../services/playlist.service";
 import { AppUser } from "../models/appuser.model";
-import { AuthService } from "../auth.service";
 import { IPlaylist } from "../models/playlist.model";
 
 @Component({
@@ -22,7 +20,6 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   constructor(
     private songService: SongService,
-    private authService: AuthService,
     private playlistService: PlaylistService
   ) {}
 

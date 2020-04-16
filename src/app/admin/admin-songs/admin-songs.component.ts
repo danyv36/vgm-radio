@@ -15,7 +15,7 @@ import {
 import { Subscription } from "rxjs";
 import * as _ from "lodash";
 import { MyErrorStateMatcher } from "../utils/error-state-matcher";
-import { SongService } from "src/app/song.service";
+import { SongService } from "src/app/services/song.service";
 import { ISong } from "src/app/models/songs.model";
 
 @Component({

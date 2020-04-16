@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ISong } from "src/app/models/songs.model";
-import { SongService } from "src/app/song.service";
+import { SongService } from "src/app/services/song.service";
 
 @Component({
   selector: "app-admin-dialog",

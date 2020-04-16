@@ -4,7 +4,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Observable, of } from "rxjs";
 import { switchMap, map, share } from "rxjs/operators";
 import { ActivatedRoute } from "@angular/router";
-import { AppUser } from "./models/appuser.model";
+import { AppUser } from "../models/appuser.model";
 import { UserService } from "./user.service";
 
 @Injectable({
