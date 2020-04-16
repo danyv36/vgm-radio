@@ -5,7 +5,7 @@ import { ISong } from "../models/songs.model";
 import { PlaylistService } from "../services/playlist.service";
 import { AppUser } from "../models/appuser.model";
 import { IPlaylist } from "../models/playlist.model";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-music-player",
@@ -18,14 +18,17 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[];
   imageSrc: string;
   appUser: AppUser;
-  playerState = new BehaviorSubject<IPlayerState>({ playlistsLoaded: false, songsLoaded: false });
+  playerState = new BehaviorSubject<IPlayerState>({
+    playlistsLoaded: false,
+    songsLoaded: false,
+  });
   isLoading = true;
 
   constructor(
     private songService: SongService,
     private playlistService: PlaylistService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -62,8 +65,8 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar() {
-    this.snackBar.open('Song added to playlist', 'Dismiss', {
-      duration: 3000
+    this.snackBar.open("Song added to playlist", "Dismiss", {
+      duration: 3000,
     });
   }
 

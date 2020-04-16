@@ -2,10 +2,13 @@
   {{ songs | json }}
   <ng-container *ngIf="isLoading">
     <p>Loading songs...</p>
-    <mat-progress-bar mode="indeterminate">
-    </mat-progress-bar>
+    <mat-progress-bar mode="indeterminate"> </mat-progress-bar>
   </ng-container>
-  <div *ngIf="!isLoading" class="sm2-bar-ui large flat playlist-open" id="player-wrap">
+  <div
+    *ngIf="!isLoading"
+    class="sm2-bar-ui large flat playlist-open"
+    id="player-wrap"
+  >
     <div class="bd sm2-playlist">
       <div class="sm2-playlist-target">
         <!-- playlist <ul> + <li> markup will be injected here -->
