@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { Sm2BarPlayerService } from './window-ref.service';
+import { Sm2BarPlayerService } from "./window-ref.service";
 
-describe('WindowRefService', () => {
+describe("WindowRefService", () => {
   let service: Sm2BarPlayerService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('WindowRefService', () => {
     service = TestBed.inject(Sm2BarPlayerService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

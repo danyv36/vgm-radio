@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AdminDialogComponent } from './admin-dialog.component';
+import { AdminDialogComponent } from "./admin-dialog.component";
 
-describe('AdminDialogComponent', () => {
+describe("AdminDialogComponent", () => {
   let component: AdminDialogComponent;
   let fixture: ComponentFixture<AdminDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('AdminDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

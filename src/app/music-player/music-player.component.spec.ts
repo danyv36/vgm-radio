@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MusicPlayerComponent } from './music-player.component';
+import { MusicPlayerComponent } from "./music-player.component";
 
-describe('MusicPlayerComponent', () => {
+describe("MusicPlayerComponent", () => {
   let component: MusicPlayerComponent;
   let fixture: ComponentFixture<MusicPlayerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MusicPlayerComponent ]
-    })
-    .compileComponents();
+      declarations: [MusicPlayerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('MusicPlayerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

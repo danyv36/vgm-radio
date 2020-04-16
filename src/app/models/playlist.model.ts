@@ -1,5 +1,5 @@
 export interface IPlaylist {
-    description: string;
-    name: string;
-    userId: string;
+  description: string;
+  name: string;
+  userId: string;
 }

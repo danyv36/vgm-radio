@@ -1,11 +1,16 @@
 <section>
-  <form class="song-form" [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <form class="song-form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- <p>{{form.value|json}}</p>
     <p>{{song|json}}</p> -->
     <p>
       <mat-form-field class="full-width">
         <mat-label>Title</mat-label>
-        <input formControlName="title" [errorStateMatcher]="matcher" id="title" matInput>
+        <input
+          formControlName="title"
+          [errorStateMatcher]="matcher"
+          id="title"
+          matInput
+        />
         <mat-error *ngIf="getControl('title').hasError('required')">
           Title is required
         </mat-error>
@@ -15,7 +20,12 @@
     <p>
       <mat-form-field class="full-width">
         <mat-label>Game</mat-label>
-        <input formControlName="game" [errorStateMatcher]="matcher" [value]="song?.game" matInput>
+        <input
+          formControlName="game"
+          [errorStateMatcher]="matcher"
+          [value]="song?.game"
+          matInput
+        />
         <mat-error *ngIf="getControl('game').hasError('required')">
           Name of videogame is required
         </mat-error>
@@ -25,7 +35,11 @@
     <p>
       <mat-form-field class="full-width">
         <mat-label>Composer</mat-label>
-        <input formControlName="composer" [errorStateMatcher]="matcher" matInput>
+        <input
+          formControlName="composer"
+          [errorStateMatcher]="matcher"
+          matInput
+        />
       </mat-form-field>
     </p>
 
@@ -34,7 +48,11 @@
         <td>
           <mat-form-field class="full-width">
             <mat-label>Song filename</mat-label>
-            <input formControlName="songFilename" [errorStateMatcher]="matcher" matInput>
+            <input
+              formControlName="songFilename"
+              [errorStateMatcher]="matcher"
+              matInput
+            />
             <mat-error *ngIf="getControl('songFilename').hasError('required')">
               Song filename is required
             </mat-error>
@@ -43,8 +61,14 @@
         <td>
           <mat-form-field class="full-width">
             <mat-label>OST Image filename</mat-label>
-            <input formControlName="ostImageFilename" [errorStateMatcher]="matcher" matInput>
-            <mat-error *ngIf="getControl('ostImageFilename').hasError('required')">
+            <input
+              formControlName="ostImageFilename"
+              [errorStateMatcher]="matcher"
+              matInput
+            />
+            <mat-error
+              *ngIf="getControl('ostImageFilename').hasError('required')"
+            >
               Song filename is required
             </mat-error>
           </mat-form-field>
@@ -55,6 +79,8 @@
     <p>
       <mat-checkbox formControlName="isRelaxing">Is relaxing?</mat-checkbox>
     </p>
-    <button mat-raised-button color="primary" [disabled]="!form.valid">Save</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid">
+      Save
+    </button>
   </form>
 </section>

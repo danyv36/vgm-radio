@@ -1,7 +1,6 @@
 <section>
-  {{songs|json}}
+  {{ songs | json }}
   <div class="sm2-bar-ui large flat playlist-open" id="player-wrap">
-
     <div class="bd sm2-playlist">
       <div class="sm2-playlist-target">
         <!-- playlist <ul> + <li> markup will be injected here -->
@@ -11,28 +10,36 @@
         </noscript> -->
         <div class="now-playing">
           <div class="now-playing-ost">
-            <img src="../../assets/ost/xenoblade-chronicles-x.jpg" id="track-img" />
+            <img
+              src="../../assets/ost/xenoblade-chronicles-x.jpg"
+              id="track-img"
+            />
           </div>
           <div class="now-playing-info">
             <div class="now-playing-title" id="song-name">Noctilum</div>
-            <div class="now-playing-game" id="game-name">Xenoblade Chronicles X</div>
+            <div class="now-playing-game" id="game-name">
+              Xenoblade Chronicles X
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="bd sm2-main-controls" style="background-color: rgb(63, 81, 181);">
-
+    <div
+      class="bd sm2-main-controls"
+      style="background-color: rgb(63, 81, 181);"
+    >
       <div class="sm2-inline-texture"></div>
       <div class="sm2-inline-gradient"></div>
 
       <div class="sm2-inline-element sm2-button-element">
         <div class="sm2-button-bd">
-          <a href="#play" class="sm2-inline-button sm2-icon-play-pause">Play / pause</a>
+          <a href="#play" class="sm2-inline-button sm2-icon-play-pause"
+            >Play / pause</a
+          >
         </div>
       </div>
 
       <div class="sm2-inline-element sm2-inline-status">
-
         <div class="sm2-progress">
           <div class="sm2-row">
             <div class="sm2-inline-time">0:00</div>
@@ -47,25 +54,35 @@
             <div class="sm2-inline-duration">0:00</div>
           </div>
         </div>
-
       </div>
 
       <div class="sm2-inline-element sm2-button-element sm2-volume">
         <div class="sm2-button-bd">
-          <span class="sm2-inline-button sm2-volume-control volume-shade"></span>
-          <a href="#volume" class="sm2-inline-button sm2-volume-control">volume</a>
+          <span
+            class="sm2-inline-button sm2-volume-control volume-shade"
+          ></span>
+          <a href="#volume" class="sm2-inline-button sm2-volume-control"
+            >volume</a
+          >
         </div>
       </div>
 
       <div class="sm2-inline-element sm2-button-element">
         <div class="sm2-button-bd">
-          <a href="#prev" title="Previous" class="sm2-inline-button sm2-icon-previous">&lt; previous</a>
+          <a
+            href="#prev"
+            title="Previous"
+            class="sm2-inline-button sm2-icon-previous"
+            >&lt; previous</a
+          >
         </div>
       </div>
 
       <div class="sm2-inline-element sm2-button-element">
         <div class="sm2-button-bd">
-          <a href="#next" title="Next" class="sm2-inline-button sm2-icon-next">&gt; next</a>
+          <a href="#next" title="Next" class="sm2-inline-button sm2-icon-next"
+            >&gt; next</a
+          >
         </div>
       </div>
 
@@ -74,11 +91,12 @@
           <a href="#menu" class="sm2-inline-button sm2-icon-menu">menu</a>
         </div>
       </div> -->
-
     </div>
 
-    <div class="bd sm2-playlist-drawer sm2-element" style="background-color: rgb(63, 81, 181);">
-
+    <div
+      class="bd sm2-playlist-drawer sm2-element"
+      style="background-color: rgb(63, 81, 181);"
+    >
       <div class="sm2-inline-texture">
         <div class="sm2-box-shadow"></div>
       </div>
@@ -86,19 +104,24 @@
       <!-- playlist content is mirrored here -->
 
       <div class="sm2-playlist-wrapper">
-
         <ul class="sm2-playlist-bd">
-
           <!-- item with "download" link -->
           <li *ngFor="let song of songs; index as i">
             <div class="sm2-row">
               <div class="sm2-col sm2-wide">
-                <a href="http://www.schillmania.com/projects/soundmanager2/demo/_mp3/rain.mp3" [attr.img-src]=song.ostImageFilename>{{song.game}} -
-                  {{song.title}}</a>
+                <a
+                  href="http://www.schillmania.com/projects/soundmanager2/demo/_mp3/rain.mp3"
+                  [attr.img-src]="song.ostImageFilename"
+                  >{{ song.game }} - {{ song.title }}</a
+                >
               </div>
               <div class="sm2-col">
                 <!-- <a class="dropbtn sm2-icon sm2-uplaylist sm2-exclude">d</a> -->
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="menu"
+                  aria-label="Example icon-button with a menu"
+                >
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
@@ -112,10 +135,15 @@
                 </mat-menu>
                 <mat-menu #existing="matMenu">
                   <ng-container *ngFor="let playlist of playlists">
-                    <button mat-menu-item (click)="addToPlaylist(song, playlist.key)">{{playlist.name}}</button>
+                    <button
+                      mat-menu-item
+                      (click)="addToPlaylist(song, playlist.key)"
+                    >
+                      {{ playlist.name }}
+                    </button>
                   </ng-container>
                 </mat-menu>
-            </div>
+              </div>
             </div>
           </li>
 
@@ -124,19 +152,23 @@
               People
               Asking <span class="label">Explicit</span></a></li> -->
         </ul>
-
       </div>
 
       <div class="sm2-extra-controls">
-
         <div class="bd">
-
           <div class="sm2-inline-element sm2-button-element">
-            <a href="#prev" title="Previous" class="sm2-inline-button sm2-icon-previous">&lt; previous</a>
+            <a
+              href="#prev"
+              title="Previous"
+              class="sm2-inline-button sm2-icon-previous"
+              >&lt; previous</a
+            >
           </div>
 
           <div class="sm2-inline-element sm2-button-element">
-            <a href="#next" title="Next" class="sm2-inline-button sm2-icon-next">&gt; next</a>
+            <a href="#next" title="Next" class="sm2-inline-button sm2-icon-next"
+              >&gt; next</a
+            >
           </div>
 
           <!-- not implemented -->
@@ -151,12 +183,8 @@
       <a href="#shuffle" title="Shuffle" class="sm2-inline-button sm2-icon-shuffle">shuffle</a>
      </div>
      -->
-
         </div>
-
       </div>
-
     </div>
-
   </div>
 </section>

@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NoAccessComponent } from './no-access.component';
+import { NoAccessComponent } from "./no-access.component";
 
-describe('NoAccessComponent', () => {
+describe("NoAccessComponent", () => {
   let component: NoAccessComponent;
   let fixture: ComponentFixture<NoAccessComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoAccessComponent ]
-    })
-    .compileComponents();
+      declarations: [NoAccessComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('NoAccessComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -5,9 +5,13 @@
     <div>
       <a *ngIf="!isLoggedIn" mat-button [routerLink]="'/login'"> Login </a>
       <ng-container *ngIf="isLoggedIn">
-        <button mat-button [matMenuTriggerFor]="menu">{{appUser.displayName}}</button>
+        <button mat-button [matMenuTriggerFor]="menu">
+          {{ appUser.displayName }}
+        </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item [routerLink]="'/admin'" *ngIf="isAdmin">Admin</button>
+          <button mat-menu-item [routerLink]="'/admin'" *ngIf="isAdmin">
+            Admin
+          </button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
       </ng-container>

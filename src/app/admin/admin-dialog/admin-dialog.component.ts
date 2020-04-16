@@ -1,29 +1,30 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ISong } from 'src/app/models/songs.model';
-import { SongService } from 'src/app/song.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { ISong } from "src/app/models/songs.model";
+import { SongService } from "src/app/song.service";
 
 @Component({
-  selector: 'app-admin-dialog',
-  templateUrl: './admin-dialog.component.html',
-  styleUrls: ['./admin-dialog.component.css']
+  selector: "app-admin-dialog",
+  templateUrl: "./admin-dialog.component.html",
+  styleUrls: ["./admin-dialog.component.css"],
 })
 export class AdminDialogComponent implements OnInit {
-
   deleteProgress = 0;
   editMode: boolean;
 
-  constructor(public dialogRef: MatDialogRef<AdminDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ISong, private songService: SongService) {
-    console.log('data received in dialog::', data);
+  constructor(
+    public dialogRef: MatDialogRef<AdminDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ISong,
+    private songService: SongService
+  ) {
+    console.log("data received in dialog::", data);
     this.editMode = !!data && !!data.key;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSongSaved(): void {
-    console.log('hello!! song was saved!!');
+    console.log("hello!! song was saved!!");
     this.dialogRef.close();
   }
 
@@ -39,5 +40,4 @@ export class AdminDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
