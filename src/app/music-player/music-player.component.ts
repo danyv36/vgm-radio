@@ -37,8 +37,14 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       this.subscriptions.push(this.playlistService.getUserPlaylists(uid).subscribe((playlists: IPlaylist[]) => {
         console.log('playlists fetched::', playlists);
         this.playlists = playlists;
-      })); 
+      }));
     }
+  }
+
+  addToPlaylist(song: ISong, playlistKey: string) {
+    console.log('song::', song);
+    console.log('playlistKey::', playlistKey);
+    this.playlistService.addSongToPlaylist(song, playlistKey);
   }
 
   ngOnDestroy() {

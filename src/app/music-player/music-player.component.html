@@ -112,7 +112,7 @@
                 </mat-menu>
                 <mat-menu #existing="matMenu">
                   <ng-container *ngFor="let playlist of playlists">
-                    <button mat-menu-item>{{playlist.name}}</button>
+                    <button mat-menu-item (click)="addToPlaylist(song, playlist.key)">{{playlist.name}}</button>
                   </ng-container>
                 </mat-menu>
             </div>
