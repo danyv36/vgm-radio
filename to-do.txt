@@ -1,5 +1,9 @@
-- x Create basic login process
-- x Create basic navbar at the top
-- Create CRUD pages
-  - Have a snackbar for when a song is saved! :)
-- Get soundmanager to work in the main page...
+x- Put loading message when fetching songs for music player
+- Show "My Playlists" at the top
+- Access a playlist and load the songs from it
+- Create a playlist
+  - From navbar
+  - From submenu in playlist
+- Delete a playlist
+- Pagination
+- Search for songs in main music player

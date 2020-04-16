@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SongService } from "../services/song.service";
-import { Subscription } from "rxjs";
+import { Subscription, BehaviorSubject } from "rxjs";
 import { ISong } from "../models/songs.model";
 import { PlaylistService } from "../services/playlist.service";
 import { AppUser } from "../models/appuser.model";
@@ -18,18 +18,29 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[];
   imageSrc: string;
   appUser: AppUser;
+  playerState = new BehaviorSubject<IPlayerState>({ playlistsLoaded: false, songsLoaded: false });
+  isLoading = true;
 
   constructor(
     private songService: SongService,
     private playlistService: PlaylistService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.subscriptions.push(
       this.songService.getAll().subscribe((songs: ISong[]) => {
         console.log("music player songs fetched::", songs);
         this.songs = songs;
+        this.updateState({ songsLoaded: true });
+      })
+    );
+
+    this.subscriptions.push(
+      this.playerState.subscribe((state) => {
+        if (!!state.playlistsLoaded && !!state.songsLoaded) {
+          this.isLoading = false;
+        }
       })
     );
 
@@ -42,8 +53,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
           .subscribe((playlists: IPlaylist[]) => {
             console.log("playlists fetched::", playlists);
             this.playlists = playlists;
+            this.updateState({ playlistsLoaded: true });
           })
       );
+    } else {
+      this.updateState({ playlistsLoaded: true });
     }
   }
 
@@ -51,6 +65,10 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.snackBar.open('Song added to playlist', 'Dismiss', {
       duration: 3000
     });
+  }
+
+  updateState(newState: IPlayerState) {
+    this.playerState.next({ ...this.playerState.value, ...newState });
   }
 
   async addToPlaylist(song: ISong, playlistKey: string) {
@@ -63,4 +81,9 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       subscription.unsubscribe();
     });
   }
+}
+
+export interface IPlayerState {
+  playlistsLoaded?: boolean;
+  songsLoaded?: boolean;
 }
