@@ -49,8 +49,8 @@ import { MusicPlayerComponent } from "./music-player/music-player.component";
 import { Sm2BarPlayerService } from "./services/window-ref.service";
 import { ScriptService } from "./services/script.service";
 import { PlaylistService } from "./services/playlist.service";
-import { PlaylistsComponent } from './playlists/playlists.component';
-import { PlaylistState } from './playlists/playlists.state';
+import { PlaylistsComponent } from "./playlists/playlists.component";
+import { PlaylistState } from "./playlists/playlists.state";
 
 @NgModule({
   declarations: [

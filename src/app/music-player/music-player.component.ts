@@ -6,7 +6,7 @@ import { PlaylistService } from "../services/playlist.service";
 import { AppUser } from "../models/appuser.model";
 import { IPlaylist } from "../models/playlist.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { PlaylistState, IPlaylistState } from '../playlists/playlists.state';
+import { PlaylistState, IPlaylistState } from "../playlists/playlists.state";
 
 @Component({
   selector: "app-music-player",
@@ -56,9 +56,9 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
       this.subscriptions.push(
         this.playlistState.playlists$.subscribe((result: IPlaylistState) => {
-          console.log('playlists from state::', result);
+          console.log("playlists from state::", result);
           this.playlists = result.playlists;
-          this.updateState({playlistsLoaded: true});
+          this.updateState({ playlistsLoaded: true });
         })
         // this.playlistService
         //   .getUserPlaylists(uid)
