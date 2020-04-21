@@ -8,7 +8,7 @@
 </button>
 <mat-menu #playlistMenu="matMenu">
   <ng-container *ngFor="let playlist of playlists">
-    <button mat-menu-item>
+    <button mat-menu-item [routerLink]="['/playlist', playlist.key]">
       {{ playlist.name }}
     </button>
   </ng-container>

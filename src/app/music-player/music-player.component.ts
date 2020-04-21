@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { SongService } from "../services/song.service";
 import { Subscription, BehaviorSubject } from "rxjs";
 import { ISong } from "../models/songs.model";
@@ -7,6 +7,7 @@ import { AppUser } from "../models/appuser.model";
 import { IPlaylist } from "../models/playlist.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { PlaylistState, IPlaylistState } from "../playlists/playlists.state";
+import { MusicPlayerState } from './music-player.state';
 
 @Component({
   selector: "app-music-player",
@@ -14,35 +15,24 @@ import { PlaylistState, IPlaylistState } from "../playlists/playlists.state";
   styleUrls: ["./music-player.component.scss"],
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
+  @Input() songs: ISong[];
   subscriptions: Subscription[] = [];
-  songs: ISong[];
   playlists: IPlaylist[];
   imageSrc: string;
   appUser: AppUser;
-  playerState = new BehaviorSubject<IPlayerState>({
-    playlistsLoaded: false,
-    songsLoaded: false,
-  });
   isLoading = true;
 
   constructor(
-    private songService: SongService,
+    private musicPlayerState: MusicPlayerState,
     private playlistService: PlaylistService,
     private playlistState: PlaylistState,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.songService.getAll().subscribe((songs: ISong[]) => {
-        console.log("music player songs fetched::", songs);
-        this.songs = songs;
-        this.updateState({ songsLoaded: true });
-      })
-    );
 
     this.subscriptions.push(
-      this.playerState.subscribe((state) => {
+      this.musicPlayerState.playerState$.subscribe((state) => {
         if (!!state.playlistsLoaded && !!state.songsLoaded) {
           this.isLoading = false;
         }
@@ -58,18 +48,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         this.playlistState.playlists$.subscribe((result: IPlaylistState) => {
           console.log("playlists from state::", result);
           this.playlists = result.playlists;
-          this.updateState({ playlistsLoaded: true });
+          this.musicPlayerState.updateState({ playlistsLoaded: true });
         })
-        // this.playlistService
-        //   .getUserPlaylists(uid)
-        //   .subscribe((playlists: IPlaylist[]) => {
-        //     console.log("playlists fetched::", playlists);
-        //     this.playlists = playlists;
-        //     this.updateState({ playlistsLoaded: true });
-        //   })
       );
     } else {
-      this.updateState({ playlistsLoaded: true });
+      this.musicPlayerState.updateState({ playlistsLoaded: true });
     }
   }
 
@@ -77,10 +60,6 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.snackBar.open("Song added to playlist", "Dismiss", {
       duration: 3000,
     });
-  }
-
-  updateState(newState: IPlayerState) {
-    this.playerState.next({ ...this.playerState.value, ...newState });
   }
 
   async addToPlaylist(song: ISong, playlistKey: string) {

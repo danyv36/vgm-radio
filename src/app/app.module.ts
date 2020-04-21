@@ -51,6 +51,8 @@ import { ScriptService } from "./services/script.service";
 import { PlaylistService } from "./services/playlist.service";
 import { PlaylistsComponent } from "./playlists/playlists.component";
 import { PlaylistState } from "./playlists/playlists.state";
+import { MyPlaylistComponent } from './my-playlist/my-playlist.component';
+import { MusicPlayerState } from './music-player/music-player.state';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { PlaylistState } from "./playlists/playlists.state";
     HoldableDirective,
     MusicPlayerComponent,
     PlaylistsComponent,
+    MyPlaylistComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +101,7 @@ import { PlaylistState } from "./playlists/playlists.state";
         component: AdminComponent,
         canActivate: [AdminAuthGuardService],
       },
+      { path: "playlist/:playlistId", component: MyPlaylistComponent},
       { path: "login", component: LoginComponent },
       { path: "no-access", component: NoAccessComponent },
     ]),
@@ -114,6 +118,7 @@ import { PlaylistState } from "./playlists/playlists.state";
     ScriptService,
     PlaylistService,
     PlaylistState,
+    MusicPlayerState,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
   ],
   bootstrap: [AppComponent],

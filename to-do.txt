@@ -1,5 +1,5 @@
 x- Put loading message when fetching songs for music player
-- Show "My Playlists" at the top
+x - Show "My Playlists" at the top
 - Access a playlist and load the songs from it
 - Create a playlist
   - From navbar
@@ -7,3 +7,4 @@ x- Put loading message when fetching songs for music player
 - Delete a playlist
 - Pagination
 - Search for songs in main music player
+- User cannot access playlists that aren't theirs
