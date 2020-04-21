@@ -49,6 +49,8 @@ import { MusicPlayerComponent } from "./music-player/music-player.component";
 import { Sm2BarPlayerService } from "./services/window-ref.service";
 import { ScriptService } from "./services/script.service";
 import { PlaylistService } from "./services/playlist.service";
+import { PlaylistsComponent } from './playlists/playlists.component';
+import { PlaylistState } from './playlists/playlists.state';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { PlaylistService } from "./services/playlist.service";
     AdminDialogComponent,
     HoldableDirective,
     MusicPlayerComponent,
+    PlaylistsComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +113,7 @@ import { PlaylistService } from "./services/playlist.service";
     Sm2BarPlayerService,
     ScriptService,
     PlaylistService,
+    PlaylistState,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
   ],
   bootstrap: [AppComponent],

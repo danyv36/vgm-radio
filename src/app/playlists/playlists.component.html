@@ -1,0 +1,11 @@
+<button mat-icon-button [matMenuTriggerFor]="playlistMenu" aria-label="My playlists">
+    My playlists
+    <mat-icon>keyboard_arrow_down</mat-icon>
+</button>
+<mat-menu #playlistMenu="matMenu">
+    <ng-container *ngFor="let playlist of playlists">
+        <button mat-menu-item>
+            {{ playlist.name }}
+        </button>
+    </ng-container>
+</mat-menu>

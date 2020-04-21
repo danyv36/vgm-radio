@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AuthService } from "../services/auth.service";
 import { AppUser } from "../models/appuser.model";
 import { Subscription } from "rxjs";
+import { PlaylistService } from '../services/playlist.service';
 
 @Component({
   selector: "app-navbar",
@@ -12,7 +13,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   appUser: AppUser;
   subscription: Subscription;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private playlistService: PlaylistService) {}
 
   ngOnInit() {
     this.subscription = this.auth.appUser$.subscribe((appUser) => {

@@ -7,6 +7,7 @@
       <ng-container *ngIf="isLoggedIn">
         <button mat-button [matMenuTriggerFor]="menu">
           {{ appUser.displayName }}
+          <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item [routerLink]="'/admin'" *ngIf="isAdmin">
@@ -14,6 +15,7 @@
           </button>
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
+        <app-playlists></app-playlists>
       </ng-container>
     </div>
   </mat-toolbar-row>

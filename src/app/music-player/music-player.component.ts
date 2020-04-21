@@ -6,6 +6,7 @@ import { PlaylistService } from "../services/playlist.service";
 import { AppUser } from "../models/appuser.model";
 import { IPlaylist } from "../models/playlist.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { PlaylistState, IPlaylistState } from '../playlists/playlists.state';
 
 @Component({
   selector: "app-music-player",
@@ -27,6 +28,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   constructor(
     private songService: SongService,
     private playlistService: PlaylistService,
+    private playlistState: PlaylistState,
     private snackBar: MatSnackBar
   ) {}
 
@@ -50,14 +52,21 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     const uid = localStorage.getItem("uid");
     console.log("uid::", uid);
     if (uid) {
+      this.playlistState.getPlaylists(uid);
+
       this.subscriptions.push(
-        this.playlistService
-          .getUserPlaylists(uid)
-          .subscribe((playlists: IPlaylist[]) => {
-            console.log("playlists fetched::", playlists);
-            this.playlists = playlists;
-            this.updateState({ playlistsLoaded: true });
-          })
+        this.playlistState.playlists$.subscribe((result: IPlaylistState) => {
+          console.log('playlists from state::', result);
+          this.playlists = result.playlists;
+          this.updateState({playlistsLoaded: true});
+        })
+        // this.playlistService
+        //   .getUserPlaylists(uid)
+        //   .subscribe((playlists: IPlaylist[]) => {
+        //     console.log("playlists fetched::", playlists);
+        //     this.playlists = playlists;
+        //     this.updateState({ playlistsLoaded: true });
+        //   })
       );
     } else {
       this.updateState({ playlistsLoaded: true });
