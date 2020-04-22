@@ -1,1 +1,15 @@
+<section>
+  <ng-container *ngIf="!isLoading">
+    <div class="page-header">
+      <h1>{{ playlist?.name }}</h1>
+      <button class="edit" mat-flat-button (click)="handleEdit()">
+        <mat-icon class="icon-display">edit</mat-icon> Edit
+      </button>
+    </div>
+    <div class="playlist-info">
+      <p class="description">{{ playlist?.description }}</p>
+      <div class="playlist-action"></div>
+    </div>
+  </ng-container>
+</section>
 <app-music-player [songs]="songs" [fetchPlaylists]="false"></app-music-player>

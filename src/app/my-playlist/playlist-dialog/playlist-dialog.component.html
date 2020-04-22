@@ -1,0 +1,59 @@
+<h2 *ngIf="editMode; else createMode" mat-dialog-title>Edit playlist</h2>
+<ng-template #createMode>Create new playlist</ng-template>
+<mat-dialog-content>
+  <ng-container>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field class="full-width">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="name"
+            [errorStateMatcher]="matcher"
+            id="name"
+            matInput
+          />
+          <mat-error *ngIf="getControl('name').hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="full-width">
+          <mat-label>Description</mat-label>
+          <input
+            formControlName="description"
+            [errorStateMatcher]="matcher"
+            [value]="playlist?.description"
+            matInput
+          />
+          <mat-error *ngIf="getControl('description').hasError('maxLength')">
+            Description cannot be longer than 100 characters
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <button mat-raised-button color="primary">Save</button>
+    </form>
+    <mat-progress-bar
+      *ngIf="editMode"
+      class="example-margin"
+      color="warn"
+      mode="determinate"
+      [value]="deleteProgress"
+    >
+    </mat-progress-bar>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button
+    mat-raised-button
+    color="warn"
+    *ngIf="editMode"
+    holdable
+    (holdTime)="holdHandler($event)"
+  >
+    Delete
+  </button>
+</mat-dialog-actions>

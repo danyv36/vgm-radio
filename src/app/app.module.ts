@@ -53,6 +53,7 @@ import { PlaylistsComponent } from './playlists/playlists.component';
 import { PlaylistState } from './playlists/playlists.state';
 import { MyPlaylistComponent } from './my-playlist/my-playlist.component';
 import { MusicPlayerState } from './music-player/music-player.state';
+import { PlaylistDialogComponent } from './my-playlist/playlist-dialog/playlist-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MusicPlayerState } from './music-player/music-player.state';
     MusicPlayerComponent,
     PlaylistsComponent,
     MyPlaylistComponent,
+    PlaylistDialogComponent,
   ],
   imports: [
     BrowserModule,

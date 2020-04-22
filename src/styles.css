@@ -4,7 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 section {
-  padding: 50px;
+  padding: 30px 50px 0px;
 }
 
 .full-width{
