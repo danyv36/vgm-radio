@@ -123,12 +123,12 @@
                   >{{ song.game }} - {{ song.title }}</a
                 >
               </div>
-              <div class="sm2-col">
+              <div class="sm2-col" *ngIf="showPlaylists">
                 <!-- <a class="dropbtn sm2-icon sm2-uplaylist sm2-exclude">d</a> -->
                 <button
                   mat-icon-button
                   [matMenuTriggerFor]="menu"
-                  aria-label="Example icon-button with a menu"
+                  aria-label="Playlist menu"
                 >
                   <mat-icon>more_vert</mat-icon>
                 </button>

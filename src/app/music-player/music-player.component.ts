@@ -68,6 +68,10 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.openSnackBar();
   }
 
+  get showPlaylists(): boolean {
+    return JSON.parse(this.fetchPlaylists);
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
