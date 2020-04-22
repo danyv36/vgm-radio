@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
-import { IPlaylist } from "../models/playlist.model";
-import { PlaylistService } from "../services/playlist.service";
-import { PlaylistState, IPlaylistState } from "./playlists.state";
-import { Subscription } from "rxjs";
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { IPlaylist } from '../models/playlist.model';
+import { PlaylistService } from '../services/playlist.service';
+import { PlaylistState, IPlaylistState } from './playlists.state';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-playlists",
-  templateUrl: "./playlists.component.html",
-  styleUrls: ["./playlists.component.css"],
+  selector: 'app-playlists',
+  templateUrl: './playlists.component.html',
+  styleUrls: ['./playlists.component.css'],
 })
 export class PlaylistsComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[];

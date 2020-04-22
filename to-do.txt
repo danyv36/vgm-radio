@@ -1,6 +1,8 @@
 x- Put loading message when fetching songs for music player
-x - Show "My Playlists" at the top
-- Access a playlist and load the songs from it
+x- Show "My Playlists" at the top
+x- Access a playlist and load the songs from it
+- Edit playlist info
+- Remove song from playlist
 - Create a playlist
   - From navbar
   - From submenu in playlist

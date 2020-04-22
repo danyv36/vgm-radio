@@ -1,7 +1,7 @@
-import { PlaylistService } from "../services/playlist.service";
-import { BehaviorSubject } from "rxjs";
-import { IPlaylist } from "../models/playlist.model";
-import { Injectable } from "@angular/core";
+import { PlaylistService } from '../services/playlist.service';
+import { BehaviorSubject } from 'rxjs';
+import { IPlaylist } from '../models/playlist.model';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PlaylistState {
@@ -13,7 +13,7 @@ export class PlaylistState {
 
   getPlaylists(uid: string) {
     this.service.getUserPlaylists(uid).subscribe((playlists: IPlaylist[]) => {
-      console.log("playlists fetched::", playlists);
+      console.log('playlists fetched::', playlists);
       this.playlists$.next({ loaded: true, playlists });
     });
   }

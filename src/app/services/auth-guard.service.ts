@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, Router, RouterStateSnapshot } from "@angular/router";
-import { AuthService } from "./auth.service";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate {
         if (appUser.displayName) {
           return true; // mapping an observable of user to an observable of boolean :)
         }
-        this.router.navigate(["/login"], {
+        this.router.navigate(['/login'], {
           queryParams: { returnUrl: state.url },
         });
         return false;

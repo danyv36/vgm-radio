@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ScriptService {
   private scripts: any = {};
   ScriptStore: Scripts[] = [
-    { name: "barUi", src: "../assets/sound-manager/js/bar-ui.js" },
+    { name: 'barUi', src: '../assets/sound-manager/js/bar-ui.js' },
   ];
 
   constructor() {
@@ -28,34 +28,34 @@ export class ScriptService {
     return new Promise((resolve, reject) => {
       //resolve if already loaded
       if (this.scripts[name].loaded) {
-        resolve({ script: name, loaded: true, status: "Already Loaded" });
+        resolve({ script: name, loaded: true, status: 'Already Loaded' });
       } else {
         //load script
-        let script: any = document.createElement("script");
-        script.type = "text/javascript";
+        let script: any = document.createElement('script');
+        script.type = 'text/javascript';
         script.src = this.scripts[name].src;
         if (script.readyState) {
           //IE
           script.onreadystatechange = () => {
             if (
-              script.readyState === "loaded" ||
-              script.readyState === "complete"
+              script.readyState === 'loaded' ||
+              script.readyState === 'complete'
             ) {
               script.onreadystatechange = null;
               this.scripts[name].loaded = true;
-              resolve({ script: name, loaded: true, status: "Loaded" });
+              resolve({ script: name, loaded: true, status: 'Loaded' });
             }
           };
         } else {
           //Others
           script.onload = () => {
             this.scripts[name].loaded = true;
-            resolve({ script: name, loaded: true, status: "Loaded" });
+            resolve({ script: name, loaded: true, status: 'Loaded' });
           };
         }
         script.onerror = (error: any) =>
-          resolve({ script: name, loaded: false, status: "Loaded" });
-        document.getElementsByTagName("head")[0].appendChild(script);
+          resolve({ script: name, loaded: false, status: 'Loaded' });
+        document.getElementsByTagName('head')[0].appendChild(script);
       }
     });
   }

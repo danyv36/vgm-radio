@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MusicPlayerState } from "../music-player/music-player.state";
-import { SongService } from "../services/song.service";
-import { Subscription } from "rxjs";
-import { ISong } from "../models/songs.model";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MusicPlayerState } from '../music-player/music-player.state';
+import { SongService } from '../services/song.service';
+import { Subscription } from 'rxjs';
+import { ISong } from '../models/songs.model';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.songService.getAll().subscribe((songs: ISong[]) => {
-        console.log("music player songs fetched::", songs);
+        console.log('music player songs fetched::', songs);
         this.songs = songs;
         this.musicPlayerState.updateState({ songsLoaded: true });
       })

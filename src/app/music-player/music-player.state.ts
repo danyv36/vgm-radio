@@ -1,7 +1,7 @@
-import { BehaviorSubject } from "rxjs";
-import { Injectable } from "@angular/core";
-import { ISong } from "../models/songs.model";
-import { SongService } from "../services/song.service";
+import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ISong } from '../models/songs.model';
+import { SongService } from '../services/song.service';
 
 @Injectable()
 export class MusicPlayerState {

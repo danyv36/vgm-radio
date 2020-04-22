@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { AngularFireDatabase, AngularFireObject } from "angularfire2/database";
-import * as firebase from "firebase";
-import { AppUser } from "../models/appuser.model";
-import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import * as firebase from 'firebase';
+import { AppUser } from '../models/appuser.model';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserService {
   constructor(private db: AngularFireDatabase) {}
@@ -29,7 +29,7 @@ export class UserService {
             uid,
           };
 
-          localStorage.setItem("uid", uid);
+          localStorage.setItem('uid', uid);
           return appUser;
         })
       );

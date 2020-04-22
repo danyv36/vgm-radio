@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, Router, RouterStateSnapshot } from "@angular/router";
-import { AuthService } from "./auth.service";
-import { UserService } from "./user.service";
-import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
-import { AppUser } from "../models/appuser.model";
+import { Injectable } from '@angular/core';
+import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { AppUser } from '../models/appuser.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AdminAuthGuardService implements CanActivate {
   constructor(
@@ -20,12 +20,12 @@ export class AdminAuthGuardService implements CanActivate {
     return this.auth.appUser$.pipe(
       map((appUser: AppUser) => {
         if (appUser.roles && appUser.roles.admin) {
-          console.log("is admin");
+          console.log('is admin');
           return true;
         }
 
-        console.log("not an admin");
-        this.router.navigate(["/login"], {
+        console.log('not an admin');
+        this.router.navigate(['/login'], {
           queryParams: { returnUrl: state.url },
         });
         return false;

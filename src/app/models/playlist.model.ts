@@ -1,4 +1,4 @@
-import { ISong } from "./songs.model";
+import { ISong } from './songs.model';
 
 export interface IPlaylist {
   description: string;
