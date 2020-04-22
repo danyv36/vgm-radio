@@ -13,11 +13,11 @@ export class PlaylistService {
 
   getUserPlaylists(uid: string): Observable<any> {
     return this.db
-      .list('/playlists', (ref) => ref.orderByChild('userId').equalTo(uid))
+      .list("/playlists", (ref) => ref.orderByChild("userId").equalTo(uid))
       .snapshotChanges()
       .pipe(
         map((playlists) => {
-          console.log('playlists being returned::', playlists);
+          console.log("playlists being returned::", playlists);
           return playlists.map((p) => ({
             key: p.payload.key,
             ...(p.payload.val() as Object),

@@ -51,8 +51,8 @@ import { ScriptService } from "./services/script.service";
 import { PlaylistService } from "./services/playlist.service";
 import { PlaylistsComponent } from "./playlists/playlists.component";
 import { PlaylistState } from "./playlists/playlists.state";
-import { MyPlaylistComponent } from './my-playlist/my-playlist.component';
-import { MusicPlayerState } from './music-player/music-player.state';
+import { MyPlaylistComponent } from "./my-playlist/my-playlist.component";
+import { MusicPlayerState } from "./music-player/music-player.state";
 
 @NgModule({
   declarations: [
@@ -101,7 +101,7 @@ import { MusicPlayerState } from './music-player/music-player.state';
         component: AdminComponent,
         canActivate: [AdminAuthGuardService],
       },
-      { path: "playlist/:playlistId", component: MyPlaylistComponent},
+      { path: "playlist/:playlistId", component: MyPlaylistComponent },
       { path: "login", component: LoginComponent },
       { path: "no-access", component: NoAccessComponent },
     ]),

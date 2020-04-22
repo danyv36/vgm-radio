@@ -7,7 +7,7 @@ import { AppUser } from "../models/appuser.model";
 import { IPlaylist } from "../models/playlist.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { PlaylistState, IPlaylistState } from "../playlists/playlists.state";
-import { MusicPlayerState } from './music-player.state';
+import { MusicPlayerState } from "./music-player.state";
 
 @Component({
   selector: "app-music-player",
@@ -16,6 +16,7 @@ import { MusicPlayerState } from './music-player.state';
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   @Input() songs: ISong[];
+  @Input() fetchPlaylists: string;
   subscriptions: Subscription[] = [];
   playlists: IPlaylist[];
   imageSrc: string;
@@ -30,7 +31,6 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-
     this.subscriptions.push(
       this.musicPlayerState.playerState$.subscribe((state) => {
         if (!!state.playlistsLoaded && !!state.songsLoaded) {
@@ -41,7 +41,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
     const uid = localStorage.getItem("uid");
     console.log("uid::", uid);
-    if (uid) {
+    if (uid && Boolean(this.fetchPlaylists)) {
       this.playlistState.getPlaylists(uid);
 
       this.subscriptions.push(
@@ -52,6 +52,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         })
       );
     } else {
+      console.log("did not fetch playlists!");
       this.musicPlayerState.updateState({ playlistsLoaded: true });
     }
   }
