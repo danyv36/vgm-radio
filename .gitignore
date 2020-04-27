@@ -37,8 +37,6 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/src/assets/sound-manager/js/soundmanager-src/demo
-/src/assets/sound-manager/js/soundmanager-src/doc
 
 # System Files
 .DS_Store
