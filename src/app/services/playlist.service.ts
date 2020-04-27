@@ -54,6 +54,14 @@ export class PlaylistService {
     return this.db.object(`/playlists/${key}/songs/${songKey}`).update(song);
   }
 
+  async deleteSongFromPlaylist(songKey: string, key: string): Promise<void> {
+    if (!key || !songKey) {
+      throw new Error('No key was provided to update the playlist.');
+    }
+
+    return this.db.object(`/playlists/${key}/songs/${songKey}`).remove();
+  }
+
   delete(key: string) {
     if (!key) {
       throw new Error('No key was provided to delete the playlist');

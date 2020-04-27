@@ -1,4 +1,5 @@
 <section>
+  <p>{{ songs | json }}</p>
   <ng-container *ngIf="isLoading">
     <p>Loading songs...</p>
     <mat-progress-bar mode="indeterminate"> </mat-progress-bar>
@@ -122,7 +123,7 @@
                   >{{ song.game }} - {{ song.title }}</a
                 >
               </div>
-              <div class="sm2-col" *ngIf="showPlaylists">
+              <div class="sm2-col">
                 <!-- <a class="dropbtn sm2-icon sm2-uplaylist sm2-exclude">d</a> -->
                 <button
                   mat-icon-button
@@ -132,12 +133,21 @@
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item [matMenuTriggerFor]="existing">
-                    <span>Add to playlist</span>
-                  </button>
-                  <button mat-menu-item>
-                    <span>New playlist</span>
-                    <mat-icon>add</mat-icon>
+                  <ng-container *ngIf="showPlaylists">
+                    <button mat-menu-item [matMenuTriggerFor]="existing">
+                      <span>Add to playlist</span>
+                    </button>
+                    <button mat-menu-item>
+                      <span>New playlist</span>
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </ng-container>
+                  <button
+                    *ngIf="!showPlaylists"
+                    mat-menu-item
+                    (click)="removeFromPlaylist(song)"
+                  >
+                    <span>Remove from playlist</span>
                   </button>
                 </mat-menu>
                 <mat-menu #existing="matMenu">

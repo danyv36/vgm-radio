@@ -1,6 +1,12 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { SongService } from '../services/song.service';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ISong } from '../models/songs.model';
 import { PlaylistService } from '../services/playlist.service';
 import { AppUser } from '../models/appuser.model';
@@ -18,6 +24,7 @@ import { AppUtils } from '../utils/utils';
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   @Input() songs: ISong[];
   @Input() displayPlaylists: string;
+  @Output() deleteFromPlaylist = new EventEmitter();
   subscriptions: Subscription[] = [];
   playlists: IPlaylist[];
   imageSrc: string;
@@ -61,6 +68,11 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   async addToPlaylist(song: ISong, playlistKey: string) {
     await this.playlistService.addSongToPlaylist(song, playlistKey);
     AppUtils.openSnackbar(this.snackBar, 'Song added to playlist');
+  }
+
+  async removeFromPlaylist(song: ISong) {
+    console.log('gonna remove this from the playlist::', song);
+    this.deleteFromPlaylist.emit(song);
   }
 
   get showPlaylists(): boolean {

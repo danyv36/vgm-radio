@@ -42,10 +42,18 @@ export class MyPlaylistComponent implements OnInit, OnDestroy {
             this.playlistId = params.get('playlistId');
             return this.playlistService.getPlaylistById(this.playlistId);
           }),
-          map((playlist: IPlaylist) => ({
-            ...playlist,
-            songs: _.isNil(playlist.songs) ? [] : Object.values(playlist.songs),
-          }))
+          map((playlist: IPlaylist) => {
+            const songs = Object.keys(playlist.songs).map((key) => {
+              return {
+                key,
+                ...playlist.songs[key],
+              };
+            });
+            return {
+              ...playlist,
+              songs,
+            };
+          })
         )
         .subscribe((playlist: IPlaylist) => {
           this.playlist = playlist;
@@ -79,6 +87,14 @@ export class MyPlaylistComponent implements OnInit, OnDestroy {
         ...this.playlist,
       },
     });
+  }
+
+  async handleDelete(song: ISong) {
+    await this.playlistService.deleteSongFromPlaylist(
+      song.key,
+      this.playlistId
+    );
+    AppUtils.openSnackbar(this.snackBar, 'Song removed from playlist');
   }
 
   ngOnDestroy(): void {

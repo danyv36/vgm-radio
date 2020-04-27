@@ -2,7 +2,7 @@ x- Put loading message when fetching songs for music player
 x- Show "My Playlists" at the top
 x- Access a playlist and load the songs from it
 x- Edit playlist info
-- Delete a playlist
+x- Delete a playlist
 - Remove song from playlist
 - Create a playlist
   - From navbar
