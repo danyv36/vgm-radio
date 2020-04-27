@@ -16,7 +16,7 @@ import { MusicPlayerState } from './music-player.state';
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   @Input() songs: ISong[];
-  @Input() fetchPlaylists: string;
+  @Input() displayPlaylists: string;
   subscriptions: Subscription[] = [];
   playlists: IPlaylist[];
   imageSrc: string;
@@ -41,7 +41,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
     const uid = localStorage.getItem('uid');
     console.log('uid::', uid);
-    if (uid && Boolean(this.fetchPlaylists)) {
+    if (uid) {
       this.playlistState.getPlaylists(uid);
 
       this.subscriptions.push(
@@ -52,7 +52,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         })
       );
     } else {
-      console.log('did not fetch playlists!');
+      console.log('did not fetch playlists because no user id was provided!');
       this.musicPlayerState.updateState({ playlistsLoaded: true });
     }
   }
@@ -69,7 +69,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   get showPlaylists(): boolean {
-    return JSON.parse(this.fetchPlaylists);
+    return JSON.parse(this.displayPlaylists);
   }
 
   ngOnDestroy() {

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { IPlaylist } from '../models/playlist.model';
-import { PlaylistService } from '../services/playlist.service';
 import { PlaylistState, IPlaylistState } from './playlists.state';
 import { Subscription } from 'rxjs';
 
@@ -13,14 +12,12 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[];
   subscriptions: Subscription[] = [];
 
-  constructor(
-    private playlistService: PlaylistService,
-    private playlistState: PlaylistState
-  ) {}
+  constructor(private playlistState: PlaylistState) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
       this.playlistState.playlists$.subscribe((result: IPlaylistState) => {
+        console.log('results???:', result);
         this.playlists = result.playlists;
       })
     );

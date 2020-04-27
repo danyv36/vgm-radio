@@ -26,6 +26,23 @@ export class PlaylistService {
       );
   }
 
+  save(playlist: IPlaylist) {
+    return this.db
+      .list('/playlists')
+      .push(playlist)
+      .then((val) => {
+        console.log('playlist saved::', val);
+      });
+  }
+
+  async update(playlist: IPlaylist, key: string) {
+    if (!key) {
+      throw new Error('No key was provided to update the playlist.');
+    }
+    delete playlist.key;
+    return this.db.object(`/playlists/${key}`).update(playlist);
+  }
+
   async addSongToPlaylist(song: ISong, key: string): Promise<void> {
     if (!key) {
       throw new Error('No key was provided to update the playlist.');

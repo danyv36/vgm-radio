@@ -2,7 +2,7 @@
 <ng-template #createMode>Create new playlist</ng-template>
 <mat-dialog-content>
   <ng-container>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field class="full-width">
           <mat-label>Name</mat-label>
@@ -32,7 +32,9 @@
           </mat-error>
         </mat-form-field>
       </p>
-      <button mat-raised-button color="primary">Save</button>
+      <button mat-raised-button color="primary" [disabled]="!form.valid">
+        Save
+      </button>
     </form>
     <mat-progress-bar
       *ngIf="editMode"

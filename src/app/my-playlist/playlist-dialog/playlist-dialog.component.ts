@@ -15,11 +15,12 @@ export class PlaylistDialogComponent implements OnInit {
   deleteProgress = 0;
   editMode: boolean;
   playlist: IPlaylist;
+  matcher = new MyErrorStateMatcher();
+
   form = this.fb.group({
     name: ['', Validators.required],
     description: ['', Validators.maxLength(100)],
   });
-  matcher = new MyErrorStateMatcher();
 
   constructor(
     public dialogRef: MatDialogRef<PlaylistDialogComponent>,
@@ -49,6 +50,7 @@ export class PlaylistDialogComponent implements OnInit {
     }
   }
 
+  // TODO: make this common
   updatePlaylistValues(playlist: IPlaylist) {
     if (!playlist) {
       return;
@@ -69,8 +71,22 @@ export class PlaylistDialogComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    console.log('submitted');
+  async onSubmit() {
+    const playlist: IPlaylist = this.form.value;
+    if (!this.playlist) {
+      playlist.dateCreated = new Date().toISOString();
+      this.playlistService.save(playlist);
+
+      this.form.reset();
+      this.form.markAsPristine();
+      this.form.markAsUntouched();
+      this.dialogRef.close('CREATED');
+    } else {
+      playlist.dateUpdated = new Date().toISOString();
+      await this.playlistService.update(playlist, this.playlist.key);
+      console.log('done updating playlist! :)');
+      this.dialogRef.close('UPDATED');
+    }
   }
 
   onNoClick(): void {

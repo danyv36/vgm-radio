@@ -6,12 +6,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import {
-  FormBuilder,
-  Validators,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { MyErrorStateMatcher } from '../utils/error-state-matcher';

@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { MusicPlayerState } from '../music-player/music-player.state';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaylistDialogComponent } from './playlist-dialog/playlist-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-my-playlist',
@@ -26,7 +27,8 @@ export class MyPlaylistComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private playlistService: PlaylistService,
     private musicPlayerState: MusicPlayerState,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -61,10 +63,24 @@ export class MyPlaylistComponent implements OnInit, OnDestroy {
   handleEdit(): void {
     const dialogRef = this.dialog.open(PlaylistDialogComponent, {
       width: '500px',
-      data: this.playlist,
+      data: {
+        key: this.playlistId,
+        ...this.playlist,
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The playlist dialog was closed::', result);
+      if (result === 'UPDATED') {
+        this.openSnackBar('Playlist updated');
+      } else if (result === 'CREATED') {
+        this.openSnackBar('Playlist created');
+      }
+    });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Dismiss', {
+      duration: 3000,
     });
   }
 
