@@ -79,13 +79,17 @@ export class PlaylistDialogComponent implements OnInit {
   async onSubmit() {
     const playlist: IPlaylist = this.form.value;
     if (!this.playlist) {
+      const uid = localStorage.getItem('uid');
       playlist.dateCreated = new Date().toISOString();
+
+      playlist.userId = uid;
       this.playlistService.save(playlist);
 
       this.form.reset();
       this.form.markAsPristine();
       this.form.markAsUntouched();
       this.playlistState.playlistAction$.next({ action: 'CREATED' });
+      this.dialogRef.close();
     } else {
       playlist.dateUpdated = new Date().toISOString();
       await this.playlistService.update(playlist, this.playlist.key);

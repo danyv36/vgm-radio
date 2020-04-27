@@ -7,6 +7,11 @@
   <mat-icon>keyboard_arrow_down</mat-icon>
 </button>
 <mat-menu #playlistMenu="matMenu">
+  <button mat-menu-item (click)="createPlaylist()">
+    <span>New playlist</span>
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-divider></mat-divider>
   <ng-container *ngFor="let playlist of playlists">
     <button mat-menu-item [routerLink]="['/playlist', playlist.key]">
       {{ playlist.name }}

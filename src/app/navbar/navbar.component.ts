@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { AppUser } from '../models/appuser.model';
 import { Subscription } from 'rxjs';
-import { PlaylistService } from '../services/playlist.service';
+import { PlaylistState } from '../playlists/playlists.state';
+import { filter } from 'rxjs/operators';
+import { AppUtils } from '../utils/utils';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +14,32 @@ import { PlaylistService } from '../services/playlist.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   appUser: AppUser;
-  subscription: Subscription;
+  subscription: Subscription[] = [];
 
   constructor(
     private auth: AuthService,
-    private playlistService: PlaylistService
+    private playlistState: PlaylistState,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit() {
-    this.subscription = this.auth.appUser$.subscribe((appUser) => {
-      this.appUser = appUser;
-    });
+    this.subscription.push(
+      this.auth.appUser$.subscribe((appUser) => {
+        this.appUser = appUser;
+      })
+    );
+
+    this.subscription.push(
+      this.playlistState.playlistAction$
+        .pipe(filter((v) => v.action != 'INIT'))
+        .subscribe((value) => {
+          if (value.action === 'CREATED') {
+            AppUtils.openSnackbar(this.snackbar, 'Playlist created');
+          } else if (value.action === 'DELETED') {
+            AppUtils.openSnackbar(this.snackbar, 'Playlist deleted');
+          }
+        })
+    );
   }
 
   logout() {
@@ -38,6 +56,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription.forEach((s) => s.unsubscribe());
   }
 }

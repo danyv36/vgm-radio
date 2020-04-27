@@ -18,9 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   songs: ISong[];
   constructor(
     private musicPlayerState: MusicPlayerState,
-    private songService: SongService,
-    private playlistState: PlaylistState,
-    private snackbar: MatSnackBar
+    private songService: SongService
   ) {}
 
   ngOnInit(): void {
@@ -30,18 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.songs = songs;
         this.musicPlayerState.updateState({ songsLoaded: true });
       })
-    );
-
-    this.subscriptions.push(
-      this.playlistState.playlistAction$
-        .pipe(filter((v) => v.action != 'INIT'))
-        .subscribe((value) => {
-          if (value.action === 'CREATED') {
-            AppUtils.openSnackbar(this.snackbar, 'Playlist created');
-          } else if (value.action === 'DELETED') {
-            AppUtils.openSnackbar(this.snackbar, 'Playlist deleted');
-          }
-        })
     );
   }
 

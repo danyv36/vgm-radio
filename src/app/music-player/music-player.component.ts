@@ -15,6 +15,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlaylistState, IPlaylistState } from '../playlists/playlists.state';
 import { MusicPlayerState } from './music-player.state';
 import { AppUtils } from '../utils/utils';
+import { MatDialog } from '@angular/material/dialog';
+import { PlaylistDialogComponent } from '../my-playlist/playlist-dialog/playlist-dialog.component';
 
 @Component({
   selector: 'app-music-player',
@@ -35,7 +37,8 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     private musicPlayerState: MusicPlayerState,
     private playlistService: PlaylistService,
     private playlistState: PlaylistState,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -71,12 +74,17 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   async removeFromPlaylist(song: ISong) {
-    console.log('gonna remove this from the playlist::', song);
     this.deleteFromPlaylist.emit(song);
   }
 
   get showPlaylists(): boolean {
     return JSON.parse(this.displayPlaylists);
+  }
+
+  createPlaylist(): void {
+    this.dialog.open(PlaylistDialogComponent, {
+      width: '500px',
+    });
   }
 
   ngOnDestroy() {

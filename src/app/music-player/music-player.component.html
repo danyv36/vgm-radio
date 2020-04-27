@@ -137,7 +137,7 @@
                     <button mat-menu-item [matMenuTriggerFor]="existing">
                       <span>Add to playlist</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="createPlaylist()">
                       <span>New playlist</span>
                       <mat-icon>add</mat-icon>
                     </button>
