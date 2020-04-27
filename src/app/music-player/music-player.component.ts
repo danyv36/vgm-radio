@@ -8,6 +8,7 @@ import { IPlaylist } from '../models/playlist.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlaylistState, IPlaylistState } from '../playlists/playlists.state';
 import { MusicPlayerState } from './music-player.state';
+import { AppUtils } from '../utils/utils';
 
 @Component({
   selector: 'app-music-player',
@@ -57,15 +58,9 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     }
   }
 
-  openSnackBar() {
-    this.snackBar.open('Song added to playlist', 'Dismiss', {
-      duration: 3000,
-    });
-  }
-
   async addToPlaylist(song: ISong, playlistKey: string) {
     await this.playlistService.addSongToPlaylist(song, playlistKey);
-    this.openSnackBar();
+    AppUtils.openSnackbar(this.snackBar, 'Song added to playlist');
   }
 
   get showPlaylists(): boolean {

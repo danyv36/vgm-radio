@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlaylistService } from '../services/playlist.service';
-import { switchMap, catchError, map } from 'rxjs/operators';
+import { switchMap, catchError, map, filter } from 'rxjs/operators';
 import { IPlaylist } from '../models/playlist.model';
 import { of, Subscription } from 'rxjs';
 import { ISong } from '../models/songs.model';
@@ -10,6 +10,8 @@ import { MusicPlayerState } from '../music-player/music-player.state';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaylistDialogComponent } from './playlist-dialog/playlist-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PlaylistState } from '../playlists/playlists.state';
+import { AppUtils } from '../utils/utils';
 
 @Component({
   selector: 'app-my-playlist',
@@ -27,6 +29,7 @@ export class MyPlaylistComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private playlistService: PlaylistService,
     private musicPlayerState: MusicPlayerState,
+    private playlistState: PlaylistState,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
@@ -58,29 +61,23 @@ export class MyPlaylistComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    this.subscription.push(
+      this.playlistState.playlistAction$
+        .pipe(filter((v) => v.action === 'UPDATED'))
+        .subscribe((_value) => {
+          AppUtils.openSnackbar(this.snackBar, 'Playlist updated');
+        })
+    );
   }
 
   handleEdit(): void {
-    const dialogRef = this.dialog.open(PlaylistDialogComponent, {
+    this.dialog.open(PlaylistDialogComponent, {
       width: '500px',
       data: {
         key: this.playlistId,
         ...this.playlist,
       },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The playlist dialog was closed::', result);
-      if (result === 'UPDATED') {
-        this.openSnackBar('Playlist updated');
-      } else if (result === 'CREATED') {
-        this.openSnackBar('Playlist created');
-      }
-    });
-  }
-
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Dismiss', {
-      duration: 3000,
     });
   }
 

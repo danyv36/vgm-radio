@@ -3,6 +3,10 @@ import { MusicPlayerState } from '../music-player/music-player.state';
 import { SongService } from '../services/song.service';
 import { Subscription } from 'rxjs';
 import { ISong } from '../models/songs.model';
+import { PlaylistState } from '../playlists/playlists.state';
+import { filter } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppUtils } from '../utils/utils';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +18,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   songs: ISong[];
   constructor(
     private musicPlayerState: MusicPlayerState,
-    private songService: SongService
+    private songService: SongService,
+    private playlistState: PlaylistState,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +30,18 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.songs = songs;
         this.musicPlayerState.updateState({ songsLoaded: true });
       })
+    );
+
+    this.subscriptions.push(
+      this.playlistState.playlistAction$
+        .pipe(filter((v) => v.action != 'INIT'))
+        .subscribe((value) => {
+          if (value.action === 'CREATED') {
+            AppUtils.openSnackbar(this.snackbar, 'Playlist created');
+          } else if (value.action === 'DELETED') {
+            AppUtils.openSnackbar(this.snackbar, 'Playlist deleted');
+          }
+        })
     );
   }
 

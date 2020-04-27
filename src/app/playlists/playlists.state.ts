@@ -9,6 +9,10 @@ export class PlaylistState {
     loaded: false,
   });
 
+  playlistAction$: BehaviorSubject<IPlaylistActionState> = new BehaviorSubject({
+    action: 'INIT',
+  });
+
   constructor(private service: PlaylistService) {}
 
   getPlaylists(uid: string) {
@@ -22,4 +26,8 @@ export class PlaylistState {
 export interface IPlaylistState {
   loaded: boolean;
   playlists?: IPlaylist[];
+}
+
+export interface IPlaylistActionState {
+  action: 'CREATED' | 'UPDATED' | 'DELETED' | 'INIT';
 }

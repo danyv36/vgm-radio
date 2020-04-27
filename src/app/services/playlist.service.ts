@@ -54,6 +54,14 @@ export class PlaylistService {
     return this.db.object(`/playlists/${key}/songs/${songKey}`).update(song);
   }
 
+  delete(key: string) {
+    if (!key) {
+      throw new Error('No key was provided to delete the playlist');
+    }
+    console.log('trying to delete this playlist::', key);
+    return this.db.object(`/playlists/${key}`).remove();
+  }
+
   getPlaylistById(playlistId: string): Observable<any> {
     return this.db.object(`/playlists/${playlistId}`).valueChanges();
   }

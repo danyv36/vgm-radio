@@ -5,6 +5,8 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MyErrorStateMatcher } from 'src/app/admin/utils/error-state-matcher';
 import { IPlaylist } from 'src/app/models/playlist.model';
 import * as _ from 'lodash';
+import { PlaylistState } from 'src/app/playlists/playlists.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlist-dialog',
@@ -14,7 +16,6 @@ import * as _ from 'lodash';
 export class PlaylistDialogComponent implements OnInit {
   deleteProgress = 0;
   editMode: boolean;
-  playlist: IPlaylist;
   matcher = new MyErrorStateMatcher();
 
   form = this.fb.group({
@@ -23,14 +24,15 @@ export class PlaylistDialogComponent implements OnInit {
   });
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public playlist: IPlaylist,
     public dialogRef: MatDialogRef<PlaylistDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private playlistService: PlaylistService,
+    private playlistState: PlaylistState,
+    private router: Router,
     private fb: FormBuilder
   ) {
-    console.log('data received in dialog::', data);
-    this.editMode = !!data;
-    this.playlist = data;
+    console.log('data received in dialog::', playlist);
+    this.editMode = !!playlist;
   }
 
   ngOnInit(): void {
@@ -67,6 +69,9 @@ export class PlaylistDialogComponent implements OnInit {
     console.log(e);
     this.deleteProgress = e / 10;
     if (this.deleteProgress > 100) {
+      this.playlistService.delete(this.playlist.key);
+      this.playlistState.playlistAction$.next({ action: 'DELETED' });
+      this.router.navigateByUrl('/');
       this.dialogRef.close();
     }
   }
@@ -80,12 +85,13 @@ export class PlaylistDialogComponent implements OnInit {
       this.form.reset();
       this.form.markAsPristine();
       this.form.markAsUntouched();
-      this.dialogRef.close('CREATED');
+      this.playlistState.playlistAction$.next({ action: 'CREATED' });
     } else {
       playlist.dateUpdated = new Date().toISOString();
       await this.playlistService.update(playlist, this.playlist.key);
       console.log('done updating playlist! :)');
-      this.dialogRef.close('UPDATED');
+      this.playlistState.playlistAction$.next({ action: 'UPDATED' });
+      this.dialogRef.close();
     }
   }
 
