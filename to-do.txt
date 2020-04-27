@@ -3,7 +3,7 @@ x- Show "My Playlists" at the top
 x- Access a playlist and load the songs from it
 x- Edit playlist info
 x- Delete a playlist
-- Remove song from playlist
+x- Remove song from playlist
 - Create a playlist
   - From navbar
   - From submenu in playlist
