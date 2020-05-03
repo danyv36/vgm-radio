@@ -17,6 +17,8 @@ import { MusicPlayerState } from './music-player.state';
 import { AppUtils } from '../utils/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaylistDialogComponent } from '../my-playlist/playlist-dialog/playlist-dialog.component';
+import * as _ from 'lodash';
+import { SongService } from '../services/song.service';
 
 @Component({
   selector: 'app-music-player',
