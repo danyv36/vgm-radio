@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 import { MyErrorStateMatcher } from '../utils/error-state-matcher';
 import { SongService } from 'src/app/services/song.service';
 import { ISong } from 'src/app/models/songs.model';
+import { atLeastOneSelected } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-admin-songs',
@@ -25,14 +26,20 @@ export class AdminSongsComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder, private songService: SongService) {}
 
-  form = this.fb.group({
-    title: ['', Validators.required],
-    game: ['', Validators.required],
-    composer: [''],
-    songFilename: ['', Validators.required],
-    ostImageFilename: ['', Validators.required],
-    isRelaxing: [false],
-  });
+  form = this.fb.group(
+    {
+      title: ['', Validators.required],
+      game: ['', Validators.required],
+      composer: [''],
+      songFilename: ['', Validators.required],
+      ostImageFilename: ['', Validators.required],
+      categories: this.fb.group({
+        relaxing: [false],
+        adventurous: [false],
+      }),
+    },
+    { validators: [atLeastOneSelected()] }
+  );
 
   matcher = new MyErrorStateMatcher();
 
@@ -70,7 +77,7 @@ export class AdminSongsComponent implements OnInit, OnDestroy {
     Object.keys(song).forEach((key) => {
       const control = this.getControl(key);
       if (control && !_.isNil(song[key])) {
-        control.setValue(song[key]);
+        control.patchValue(song[key]);
       }
     });
   }

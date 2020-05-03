@@ -4,9 +4,9 @@ x- Access a playlist and load the songs from it
 x- Edit playlist info
 x- Delete a playlist
 x- Remove song from playlist
-- Create a playlist
-  - From navbar
-  - From submenu in playlist
+x- Create a playlist
+  x- From navbar
+  x- From submenu in playlist
 - Pagination
 - Search for songs in main music player
 - User cannot access playlists that aren't theirs

@@ -69,16 +69,26 @@
             <mat-error
               *ngIf="getControl('ostImageFilename').hasError('required')"
             >
-              Song filename is required
+              OST image filename is required
             </mat-error>
           </mat-form-field>
         </td>
       </tr>
     </table>
 
-    <p>
-      <mat-checkbox formControlName="isRelaxing">Is relaxing?</mat-checkbox>
-    </p>
+    <p>Categories:</p>
+    <mat-error *ngIf="form.hasError('categoryRequired')">
+      At least one category must be selected
+    </mat-error>
+    <div formGroupName="categories">
+      <p>
+        <mat-checkbox formControlName="relaxing">Relaxing</mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox formControlName="adventurous">Adventurous</mat-checkbox>
+      </p>
+    </div>
+
     <button mat-raised-button color="primary" [disabled]="!form.valid">
       Save
     </button>
