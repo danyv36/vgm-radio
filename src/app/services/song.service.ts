@@ -30,15 +30,19 @@ export class SongService {
     return this.db.object(`/songs/${key}`).remove();
   }
 
-  getAll(offset: number = 4, startKey: string = '1') {
-    // TODO: order by date created
-    return this.db
-      .list('songs', (ref) =>
+  getAll(offset: number = 4, startKey?: string) {
+    let queryFn;
+    if (startKey) {
+      queryFn = (ref) =>
         ref
           .orderByKey()
           .startAt(startKey)
-          .limitToFirst(offset + 4)
-      )
+          .limitToFirst(offset + 1);
+    } else {
+      queryFn = (ref) => ref.orderByKey().limitToFirst(offset + 1);
+    }
+    return this.db
+      .list('songs', queryFn)
       .snapshotChanges()
       .pipe(
         map((songs) => {

@@ -32,14 +32,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log('music player songs fetched::', songs);
         this.songs = songs;
 
-        if (!_.isNil(this.songs)) {
-          const songsSliced = _.slice(this.songs, 0, this.offset);
+        if (!_.isNil(songs)) {
+          this.songs = _.slice(songs, 0, this.offset);
           console.log(
             'songs received for music player component::',
             this.songs
           );
-          console.log('songsSliced::', songsSliced);
-          this.nextKey = _.get(this.songs[4], 'key');
+          console.log('songsSliced::', this.songs);
+          this.nextKey = _.get(songs[4], 'key');
           console.log('nextKey::', this.nextKey);
         }
         this.musicPlayerState.updateState({ songsLoaded: true });

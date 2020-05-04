@@ -11,5 +11,3 @@ x- Create a playlist
 - Search for songs in main music player
 - User cannot access playlists that aren't theirs
 - Likes and dislikes....
-
-- Order songs in music player component by date created
