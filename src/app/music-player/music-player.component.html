@@ -1,6 +1,6 @@
 <section>
   <ng-container *ngIf="isLoading">
-    <p>Loading songs...</p>
+    <p id="loading-songs">Loading songs...</p>
     <mat-progress-bar mode="indeterminate"> </mat-progress-bar>
   </ng-container>
   <div
@@ -17,13 +17,10 @@
         </noscript> -->
         <div class="now-playing">
           <div class="now-playing-ost">
-            <img
-              src="../../assets/ost/xenoblade-chronicles-x.jpg"
-              id="track-img"
-            />
+            <img src="../../assets/ost/{{ trackImg }}" id="track-img" />
           </div>
           <div class="now-playing-info">
-            <div class="now-playing-title" id="song-name">Noctilum</div>
+            <div class="now-playing-title" id="song-name"></div>
             <div class="now-playing-game" id="game-name">
               Xenoblade Chronicles X
             </div>
@@ -203,4 +200,23 @@
       </div>
     </div>
   </div>
+</section>
+<section id="navigation">
+  <button
+    mat-raised-button
+    id="prev-song"
+    (click)="emitPageChange('prev')"
+    [disabled]="!prevKeys?.length"
+  >
+    Previous
+  </button>
+  <button
+    mat-raised-button
+    id="next-song"
+    (click)="emitPageChange('next')"
+    [disabled]="!nextKey"
+    color="primary"
+  >
+    Next
+  </button>
 </section>

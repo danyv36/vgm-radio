@@ -13,12 +13,12 @@ import { AppUser } from '../models/appuser.model';
 import { IPlaylist } from '../models/playlist.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlaylistState, IPlaylistState } from '../playlists/playlists.state';
-import { MusicPlayerState } from './music-player.state';
+import { MusicPlayerState, IMusicPlayerState } from './music-player.state';
 import { AppUtils } from '../utils/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaylistDialogComponent } from '../my-playlist/playlist-dialog/playlist-dialog.component';
 import * as _ from 'lodash';
-import { SongService } from '../services/song.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-music-player',
@@ -28,7 +28,11 @@ import { SongService } from '../services/song.service';
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   @Input() songs: ISong[];
   @Input() displayPlaylists: string;
+  @Input() nextKey: any;
+  @Input() prevKeys: any[];
+  @Output() pageChange = new EventEmitter();
   @Output() deleteFromPlaylist = new EventEmitter();
+  trackImg: string;
   subscriptions: Subscription[] = [];
   playlists: IPlaylist[];
   imageSrc: string;
@@ -45,11 +49,19 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.musicPlayerState.playerState$.subscribe((state) => {
-        if (!!state.playlistsLoaded && !!state.songsLoaded) {
+      this.musicPlayerState.playerState$
+        .pipe(
+          filter(
+            (state: IMusicPlayerState) =>
+              !!state.playlistsLoaded && !!state.songsLoaded
+          )
+        )
+        .subscribe((_state) => {
           this.isLoading = false;
-        }
-      })
+          if (this.songs) {
+            this.trackImg = this.songs[0].ostImageFilename;
+          }
+        })
     );
 
     const uid = localStorage.getItem('uid');
@@ -87,6 +99,10 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.dialog.open(PlaylistDialogComponent, {
       width: '500px',
     });
+  }
+
+  emitPageChange(pageAction: string): void {
+    this.pageChange.emit(pageAction);
   }
 
   ngOnDestroy() {

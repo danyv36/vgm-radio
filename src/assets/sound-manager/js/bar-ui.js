@@ -160,6 +160,8 @@
       if (links.length) {
         item = links[0];
       }
+
+      // Admin: Change title name
       // remove any failed character sequence, also
       // dom.playlistTarget.innerHTML = '<ul class="sm2-playlist-bd"><li>' + item.innerHTML.replace(extras.loadFailedCharacter, '') + '</li></ul>';
       const nowPlayingInfo = item.innerHTML.split('-');
@@ -215,6 +217,7 @@
 
         onplay: function () {
           utils.css.swap(dom.o, 'paused', 'playing');
+          // Admin: Change the OST image
           const item = playlistController.getItem(); // this returns the <li> item
           const imgSrc = item.childNodes[0].childNodes[0].childNodes[0].getAttribute('img-src'); // the child node is the <a>
           console.log('bu::item.childNodes', item.childNodes[0].childNodes[0].childNodes[0]);
@@ -333,6 +336,21 @@
           } else {
 
             // end of playlist case
+            console.log('Reached end of playable items on page');
+            // Admin: Click on the next button after reaching end of current set
+            window.document.getElementById('next-song').click(); // Click on the checkbox
+
+            const isLoading = window.document.getElementById('loading-songs');
+            console.log('isLoading::', isLoading);
+            if (!!isLoading) {
+              // set time out??
+              console.log('found is loading....::');
+            } else {
+              playlistController.refresh();
+              playlistController.data.selectedIndex = 0;
+              console.log('new data???',playlistController.data);
+              playlistController.playItemByOffset(0);
+            }
 
             // explicitly stop?
             // this.stop();
@@ -412,7 +430,6 @@
       };
 
       function getPlaylist() {
-
         return data.playlist;
 
       }
@@ -590,6 +607,8 @@
 
         item = getItem(offset);
 
+        console.log('debug::item::', item);
+
         if (item) {
           playLink(item.getElementsByTagName('a')[0]);
         }
@@ -658,6 +677,7 @@
 
       return {
         data: data,
+        init: initDOM,
         refresh: refreshDOM,
         getNext: getNext,
         getPrevious: getPrevious,

@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getSongs(key?: string) {
+    this.musicPlayerState.updateState({ songsLoaded: false });
     this.subscription = this.songService
       .getAll(this.offset, key)
       .subscribe((songs: ISong[]) => {
@@ -46,17 +47,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  nextPage() {
-    console.log('this.nextKey::', this.nextKey);
-    this.prevKeys.push(_.first(this.songs)['key']); // set current key as pointer for previous page
-    this.getSongs(this.nextKey);
-  }
-
-  prevPage() {
-    const prevKey = _.last(this.prevKeys); // use last key in array
-    this.prevKeys = _.dropRight(this.prevKeys); // then remove the last key in the array
-    console.log('prevKey::', prevKey);
-    this.getSongs(prevKey);
+  handlePageChange(event: string) {
+    if (event === 'next') {
+      console.log('this.nextKey::', this.nextKey);
+      this.prevKeys.push(_.first(this.songs)['key']); // set current key as pointer for previous page
+      this.getSongs(this.nextKey);
+    } else if (event === 'prev') {
+      const prevKey = _.last(this.prevKeys); // use last key in array
+      this.prevKeys = _.dropRight(this.prevKeys); // then remove the last key in the array
+      console.log('prevKey::', prevKey);
+      this.getSongs(prevKey);
+    }
   }
 
   ngOnDestroy(): void {

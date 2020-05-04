@@ -1,14 +1,7 @@
-<app-music-player [songs]="songs" [displayPlaylists]="true"></app-music-player>
-<section id="navigation">
-  <button mat-raised-button (click)="prevPage()" [disabled]="!prevKeys?.length">
-    Previous
-  </button>
-  <button
-    mat-raised-button
-    (click)="nextPage()"
-    [disabled]="!nextKey"
-    color="primary"
-  >
-    Next
-  </button>
-</section>
+<app-music-player
+  [songs]="songs"
+  [displayPlaylists]="true"
+  [nextKey]="nextKey"
+  [prevKeys]="prevKeys"
+  (pageChange)="handlePageChange($event)"
+></app-music-player>
