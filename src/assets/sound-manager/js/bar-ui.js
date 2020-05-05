@@ -340,17 +340,19 @@
             // Admin: Click on the next button after reaching end of current set
             window.document.getElementById('next-song').click(); // Click on the checkbox
 
-            const isLoading = window.document.getElementById('loading-songs');
-            console.log('isLoading::', isLoading);
-            if (!!isLoading) {
-              // set time out??
-              console.log('found is loading....::');
-            } else {
-              playlistController.refresh();
-              playlistController.data.selectedIndex = 0;
-              console.log('new data???',playlistController.data);
-              playlistController.playItemByOffset(0);
-            }
+            const intervalFn = () => {
+              const isLoading = window.document.getElementById('loading-songs');
+              if (!isLoading) {
+                console.log('clearing interval!');
+                clearInterval(loadingInterval);
+                playlistController.refresh();
+                playlistController.data.selectedIndex = 0;
+                playlistController.playItemByOffset(0);
+              } else {
+                console.log('songs are still loading::', isLoading);
+              }
+            };
+            const loadingInterval = setInterval(intervalFn, 800);
 
             // explicitly stop?
             // this.stop();
@@ -594,7 +596,6 @@
 
         // update selected offset, too.
         offset = findOffsetFromItem(liElement);
-        console.log('offset::', offset);
         data.selectedIndex = offset;
 
       }
@@ -606,8 +607,6 @@
         offset = (offset || 0);
 
         item = getItem(offset);
-
-        console.log('debug::item::', item);
 
         if (item) {
           playLink(item.getElementsByTagName('a')[0]);

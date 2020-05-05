@@ -49,19 +49,16 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.musicPlayerState.playerState$
-        .pipe(
-          filter(
-            (state: IMusicPlayerState) =>
-              !!state.playlistsLoaded && !!state.songsLoaded
-          )
-        )
-        .subscribe((_state) => {
+      this.musicPlayerState.playerState$.subscribe((state) => {
+        if (!!state.playlistsLoaded && !!state.songsLoaded) {
           this.isLoading = false;
           if (this.songs) {
             this.trackImg = this.songs[0].ostImageFilename;
           }
-        })
+        } else {
+          this.isLoading = true;
+        }
+      })
     );
 
     const uid = localStorage.getItem('uid');
