@@ -215,6 +215,7 @@
     id="next-song"
     (click)="emitPageChange('next')"
     [disabled]="!nextKey"
+    [attr.disabled]="!nextKey"
     color="primary"
   >
     Next

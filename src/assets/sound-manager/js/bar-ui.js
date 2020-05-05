@@ -337,23 +337,28 @@
 
             // end of playlist case
             console.log('Reached end of playable items on page');
-            // Admin: Click on the next button after reaching end of current set
-            window.document.getElementById('next-song').click(); // Click on the checkbox
+            const nextSongElem = window.document.getElementById('next-song');
+            const isDisabled = nextSongElem.getAttribute('disabled');
+            if (!!!isDisabled) {
+              // Admin: Continue playing only if we haven't reached the end of the
+              // Admin: Click on the next button after reaching end of current set
+              nextSongElem.click(); // Click on the checkbox
 
-            const intervalFn = () => {
-              const isLoading = window.document.getElementById('loading-songs');
-              if (!isLoading) {
-                console.log('clearing interval!');
-                clearInterval(loadingInterval);
-                playlistController.refresh();
-                playlistController.data.selectedIndex = 0;
-                playlistController.playItemByOffset(0);
-              } else {
-                console.log('songs are still loading::', isLoading);
-              }
-            };
-            const loadingInterval = setInterval(intervalFn, 800);
+              const intervalFn = () => {
+                const isLoading = window.document.getElementById('loading-songs');
+                if (!isLoading) {
+                  console.log('clearing interval!');
+                  clearInterval(loadingInterval);
+                  playlistController.refresh();
+                  playlistController.data.selectedIndex = 0;
+                  playlistController.playItemByOffset(0);
+                } else {
+                  console.log('Songs are still loading::', isLoading);
+                }
+              };
+              const loadingInterval = setInterval(intervalFn, 800);
 
+            }
             // explicitly stop?
             // this.stop();
 
