@@ -7,7 +7,7 @@ x- Remove song from playlist
 x- Create a playlist
   x- From navbar
   x- From submenu in playlist
-- Pagination
+x- Pagination
 - Search for songs in main music player
 - User cannot access playlists that aren't theirs
 - Likes and dislikes....

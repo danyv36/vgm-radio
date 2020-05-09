@@ -15,6 +15,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { AuthService } from './services/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {
   MatDialogModule,
@@ -25,6 +26,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -89,6 +91,8 @@ import { PlaylistDialogComponent } from './my-playlist/playlist-dialog/playlist-
     MatMenuModule,
     MatCheckboxModule,
     MatInputModule,
+    MatRadioModule,
+    MatButtonToggleModule,
     MatFormFieldModule,
     MatTableModule,
     MatSnackBarModule,

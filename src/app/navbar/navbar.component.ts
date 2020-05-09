@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NavbarComponent implements OnInit, OnDestroy {
   appUser: AppUser;
   subscription: Subscription[] = [];
+  searchBy = 'Game';
 
   constructor(
     private auth: AuthService,
@@ -31,7 +32,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.subscription.push(
       this.playlistState.playlistAction$
-        .pipe(filter((v) => v.action != 'INIT'))
+        .pipe(filter((v) => v.action !== 'INIT'))
         .subscribe((value) => {
           if (value.action === 'CREATED') {
             AppUtils.openSnackbar(this.snackbar, 'Playlist created');

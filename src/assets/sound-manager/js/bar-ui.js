@@ -340,9 +340,9 @@
             const nextSongElem = window.document.getElementById('next-song');
             const isDisabled = nextSongElem.getAttribute('disabled');
             if (!!!isDisabled) {
-              // Admin: Continue playing only if we haven't reached the end of the
+              // Admin: Continue playing only if we haven't reached the end of the entire playlist
               // Admin: Click on the next button after reaching end of current set
-              nextSongElem.click(); // Click on the checkbox
+              nextSongElem.click();
 
               const intervalFn = () => {
                 const isLoading = window.document.getElementById('loading-songs');
