@@ -7,7 +7,13 @@
     <div class="search">
       <div class="container-1">
         <span class="icon"><i class="fa fa-search"></i></span>
-        <input type="search" id="search" placeholder="Search..." />
+        <input
+          (keyup.enter)="onSearch(searchByFilter.value)"
+          [formControl]="searchByFilter"
+          type="search"
+          id="search"
+          placeholder="Search by..."
+        />
       </div>
     </div>
     <div class="search-by">
@@ -15,9 +21,14 @@
         name="search-by"
         aria-label="Search By"
         [value]="searchBy"
+        (change)="setSearchBy($event)"
       >
-        <mat-button-toggle value="Game">Game</mat-button-toggle>
-        <mat-button-toggle value="Song">Song</mat-button-toggle>
+        <mat-button-toggle [ngClass]="getSearchByClass('Game')" value="Game"
+          >Game</mat-button-toggle
+        >
+        <mat-button-toggle [ngClass]="getSearchByClass('Song')" value="Song"
+          >Song</mat-button-toggle
+        >
       </mat-button-toggle-group>
     </div>
     <div class="user-details">

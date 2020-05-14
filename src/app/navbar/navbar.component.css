@@ -23,6 +23,15 @@ mat-button-toggle,
   font-size: 14px;
 }
 
+.non-search-by {
+  font-weight: normal;
+}
+
+.search-by {
+  font-weight: bold;
+}
+
+/* Search Box Classes: */
 .container-1 {
   vertical-align: middle;
   white-space: nowrap;

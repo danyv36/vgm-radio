@@ -46,7 +46,25 @@ export class SongService {
       .snapshotChanges()
       .pipe(
         map((songs) => {
-          console.log('songs being returned::', songs);
+          return songs.map((s) => ({
+            key: s.payload.key,
+            ...(s.payload.val() as Object),
+          }));
+        })
+      );
+  }
+
+  searchByGame(filter: string, offset: number = 4) {
+    return this.db
+      .list('/songs', (ref) =>
+        ref
+          .orderByChild('search/game')
+          .startAt(filter)
+          .endAt(filter + '\uf8ff')
+      )
+      .snapshotChanges()
+      .pipe(
+        map((songs) => {
           return songs.map((s) => ({
             key: s.payload.key,
             ...(s.payload.val() as Object),

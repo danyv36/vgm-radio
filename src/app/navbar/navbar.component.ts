@@ -6,6 +6,9 @@ import { PlaylistState } from '../playlists/playlists.state';
 import { filter } from 'rxjs/operators';
 import { AppUtils } from '../utils/utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { FormControl } from '@angular/forms';
+import { SongService } from '../services/song.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,12 +18,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NavbarComponent implements OnInit, OnDestroy {
   appUser: AppUser;
   subscription: Subscription[] = [];
-  searchBy = 'Game';
+  searchBy: SearchBy = 'Game';
+  searchByFilter = new FormControl('');
 
   constructor(
     private auth: AuthService,
     private playlistState: PlaylistState,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private songService: SongService
   ) {}
 
   ngOnInit() {
@@ -56,7 +61,26 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.appUser && this.appUser.displayName;
   }
 
+  getSearchByClass(input: SearchBy) {
+    return input === this.searchBy ? 'search-by' : 'non-search-by';
+  }
+
+  setSearchBy(searchBy: MatButtonToggleChange) {
+    this.searchBy = searchBy.value;
+  }
+
+  onSearch(filter: string) {
+    if (filter.length > 0) {
+      // call database to filterrrr
+      this.songService.searchByGame(filter.toLowerCase()).subscribe((s) => {
+        console.log('wots this::', s);
+      });
+    }
+  }
+
   ngOnDestroy() {
     this.subscription.forEach((s) => s.unsubscribe());
   }
 }
+
+export type SearchBy = 'Game' | 'Song';
