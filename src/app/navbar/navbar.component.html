@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div class="title">
+      <h1>vgmrad.io</h1>
+    </div>
+    <!-- <span class="menu-spacer"></span> -->
+    <div class="search">
+      <div class="container-1">
+        <span class="icon"><i class="fa fa-search"></i></span>
+        <input
+          (keyup.enter)="onSearch(searchByFilter.value)"
+          [formControl]="searchByFilter"
+          type="search"
+          id="search"
+          placeholder="Search by..."
+        />
+      </div>
+    </div>
+    <div class="search-by">
+      <mat-button-toggle-group
+        name="search-by"
+        aria-label="Search By"
+        [value]="searchBy"
+        (change)="setSearchBy($event)"
+      >
+        <mat-button-toggle [ngClass]="getSearchByClass('Game')" value="Game"
+          >Game</mat-button-toggle
+        >
+        <mat-button-toggle [ngClass]="getSearchByClass('Song')" value="Song"
+          >Song</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </div>
+    <div class="user-details">
+      <app-playlists></app-playlists>
+      <a *ngIf="!isLoggedIn" mat-button [routerLink]="'/login'"> Login </a>
+      <ng-container *ngIf="isLoggedIn">
+        <button mat-button [matMenuTriggerFor]="menu">
+          {{ appUser.displayName }}
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="'/admin'" *ngIf="isAdmin">
+            Admin
+          </button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </ng-container>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

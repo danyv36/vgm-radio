@@ -1,0 +1,14 @@
+x- Put loading message when fetching songs for music player
+x- Show "My Playlists" at the top
+x- Access a playlist and load the songs from it
+x- Edit playlist info
+x- Delete a playlist
+x- Remove song from playlist
+x- Create a playlist
+  x- From navbar
+  x- From submenu in playlist
+x- Pagination
+- Search for songs in main music player
+- Add searchByGame and searchByTitle to db where the values will be in lowercase
+- User cannot access playlists that aren't theirs
+- Likes and dislikes....
